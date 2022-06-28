@@ -1,0 +1,3 @@
+# Cherry Server - Architecture
+
+<hr>
