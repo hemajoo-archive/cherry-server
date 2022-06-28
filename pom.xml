@@ -9,8 +9,8 @@
     <version>0.1.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>Cherry Server</name>
-    <description>Hemajoo's Commerce - Cherry Server framework.</description>
+    <name>Cherry Server - Parent</name>
+    <description>Hemajoo's Commerce - Cherry server project.</description>
 
     <developers>
 
@@ -44,6 +44,8 @@
 <!--        <module>cherry-server-product</module>-->
 <!--        <module>cherry-server-service</module>-->
 <!--        <module>cherry-server-billing</module>-->
+        <module>cherry-server-coverage</module>
+        <module>cherry-server-commons</module>
     </modules>
 
     <properties>
