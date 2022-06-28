@@ -4,7 +4,7 @@ on:
   push:
     branches: [ main ]
   pull_request:
-    branches: [ main ]
+    types: [opened, synchronize, reopened]
 
 jobs:
 
@@ -57,7 +57,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   codeql:
-    name: CodeQL analysis
+    name: CodeQL Analysis
     runs-on: ubuntu-latest
     needs: [ build ]
     permissions:
@@ -166,7 +166,7 @@ jobs:
 
   deploy:
 
-    name: Deploy Maven Artifacts
+    name: Deploy Artifacts
     if: github.event.pull_request.base.ref == 'main'
     runs-on: ubuntu-latest
     permissions:
