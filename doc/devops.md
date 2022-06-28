@@ -15,3 +15,6 @@ Each time code is pushed or a pull request (PR) is opened against a *protected* 
 |  `deploy` | Deploy the artifacts in a **Maven** registry.                                 |
 |     `jib` | Generate a Docker image of the solution and push it to a **Docker** registry. |
 
+Rules have been set to ensure, if one of these steps does not complete successfully, the code will not be merged into the protected branch!
+
+See: [Sonar - Quality Gate]()
