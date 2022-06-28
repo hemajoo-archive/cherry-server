@@ -1,5 +1,20 @@
 # Hemajoo Commerce - Cherry Server
 
+<hr>
+
+## Status
+
+
+| Metric         | Status                                                 |
+|----------------|:-------------------------------------------------------|
+| `Quality Gate` | [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=hemajoo-commerce%3Acherry-server&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=hemajoo-commerce%3Acherry-server) |
+| `Bugs`         | [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=hemajoo-commerce%3Acherry-server&metric=bugs)](https://sonarcloud.io/summary/new_code?id=hemajoo-commerce%3Acherry-server) |
+
+
+<hr>
+
+## Description
+
 This project is part of the **Hemajoo Commerce - Cherry** solution being a full stack Java microservices e-commerce application deployed on the cloud.
 
 The **Cherry Server** is a Java Maven multi-modules project providing persistence services and entities to interact with the underlying database and data. It is composed of the following modules:

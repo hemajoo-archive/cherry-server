@@ -112,7 +112,7 @@ jobs:
         uses: github/codeql-action/analyze@v1
 
   sonar:
-    name: Sonar analysis
+    name: Sonar Analysis
     runs-on: ubuntu-latest
     needs: [ build ]
 
