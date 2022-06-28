@@ -7,8 +7,8 @@
 
 | Metric         | Status                                                 |
 |----------------|:-------------------------------------------------------|
-| `Quality Gate` | [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=hemajoo-commerce%3Acherry-server&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=hemajoo-commerce%3Acherry-server) |
-| `Bugs`         | [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=hemajoo-commerce%3Acherry-server&metric=bugs)](https://sonarcloud.io/summary/new_code?id=hemajoo-commerce%3Acherry-server) |
+| `Quality Gate` | [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=com.hemajoo.commerce%3Acherry-server&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=com.hemajoo.commerce%3Acherry-server) |
+| `Bugs`         | [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=com.hemajoo.commerce%3Acherry-server&metric=bugs)](https://sonarcloud.io/summary/new_code?id=com.hemajoo.commerce%3Acherry-server) |
 
 
 <hr>
@@ -60,15 +60,15 @@ The **Cherry Server** is a Java Maven multi-modules project providing persistenc
 
 <hr>
 
-## General Documentation
+## Documentation
 
-### See: [Cherry Server - General Documentation](./doc/general.md)
+### See: [Cherry Server - Documentation](./doc/documentation.md)
 
 <hr>
 
-## Process Documentation
+## Processes
 
-### See: [Cherry Server - Process Documentation](./doc/process.md)
+### See: [Cherry Server - Processes](./doc/processes.md)
 
 <hr>
 

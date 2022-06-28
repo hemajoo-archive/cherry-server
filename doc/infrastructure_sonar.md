@@ -1,4 +1,4 @@
-# Cherry Server - Infrastructure Sonar
+# Cherry Server - Sonar Infrastructure
 
 <hr>
 

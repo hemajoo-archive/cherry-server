@@ -1,3 +1,3 @@
-# Cherry Server Architecture
+# Cherry Server - Architecture
 
 <hr>

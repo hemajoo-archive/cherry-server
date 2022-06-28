@@ -1,4 +1,4 @@
-# Cherry Server - Infrastructure Cloud
+# Cherry Server - Cloud Infrastructure
 
 <hr>
 

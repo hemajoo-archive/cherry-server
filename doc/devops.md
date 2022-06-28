@@ -8,8 +8,8 @@ Each time code is pushed or a pull request (PR) is opened against a *protected* 
 
 |      Goal | Description                                                                   |
 |----------:|:------------------------------------------------------------------------------|
-|   `build` | Build the project code.                                                       |
-|    `test` | Executes the unit tests.                                                      |
+|   `build` | Compile the project's code.                                                   |
+|    `test` | Executes the project's unit tests.                                            |
 | `package` | Generate the project's artifacts.                                             |
 |   `sonar` | Execute a static analysis of the code (code quality).                         |
 |  `deploy` | Deploy the artifacts in a **Maven** registry.                                 |

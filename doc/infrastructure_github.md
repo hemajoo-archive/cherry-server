@@ -1,4 +1,4 @@
-# Cherry Server - Infrastructure GitHub
+# Cherry Server - GitHub Infrastructure
 
 <hr>
 

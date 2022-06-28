@@ -4,22 +4,24 @@
 
 ## GitHub
 
+### See: [Infrastructure - GitHub](./doc/infrastructure_github.md)
+
 <hr>
 
-### See: [Infrastructure - GitHub](./doc/infrastructure_github.md)
+## Sonar
+
+### See: [Infrastructure - Sonar](./doc/infrastructure_sonar.md)
+
+<hr>
+
+## Jira
+
+### See: [Infrastructure - Jira](./doc/infrastructure_jira.md)
 
 <hr>
 
 ## Cloud
 
-<hr>
-
 ### See: [Infrastructure - Cloud](./doc/infrastructure_cloud.md)
 
-
-## Sonar
-
 <hr>
-
-### See: [Infrastructure - Sonar](./doc/infrastructure_sonar.md)
-
