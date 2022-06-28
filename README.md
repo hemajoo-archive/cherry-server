@@ -1,17 +1,14 @@
 # Hemajoo Commerce - Cherry Server
 
-<hr>
-
 ## Status
 
 
-| Metric         | Status                                                 |
-|----------------|:-------------------------------------------------------|
-| `Quality Gate` | [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=com.hemajoo.commerce%3Acherry-server&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=com.hemajoo.commerce%3Acherry-server) |
-| `Bugs`         | [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=com.hemajoo.commerce%3Acherry-server&metric=bugs)](https://sonarcloud.io/summary/new_code?id=com.hemajoo.commerce%3Acherry-server) |
+| Metric           | Status                                                 |
+|------------------|:-------------------------------------------------------|
+| `Quality Gate`   | [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=com.hemajoo.commerce%3Acherry-server&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=com.hemajoo.commerce%3Acherry-server) |
+| `Bugs`           | [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=com.hemajoo.commerce%3Acherry-server&metric=bugs)](https://sonarcloud.io/summary/new_code?id=com.hemajoo.commerce%3Acherry-server) |
+| `Technical Debt` | [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=com.hemajoo.commerce%3Acherry-server&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=com.hemajoo.commerce%3Acherry-server) |
 
-
-<hr>
 
 ## Description
 
@@ -34,52 +31,34 @@ The **Cherry Server** is a Java Maven multi-modules project providing persistenc
 | `cherry-server-billing`      | Contains persistence entities and services dedicated to the billing topic.           |
 | `. . .`                      | Contains persistence entities and services dedicated to the . . . area.              |
 
-<hr>
-
 ## Architecture
 
 ### See: [Cherry Server - Architecture](./doc/architecture.md)
-
-<hr>
 
 ## Infrastructure
 
 ### See: [Cherry Server - Infrastructure](./doc/infrastructure.md)
 
-<hr>
-
 ## DevOps
 
 ### See: [Cherry Server - DevOps](./doc/devops.md)
-
-<hr>
 
 ## Release History
 
 ### See: [Cherry Server - Release History](./doc/release_history.md)
 
-<hr>
-
 ## Documentation
 
 ### See: [Cherry Server - Documentation](./doc/documentation.md)
-
-<hr>
 
 ## Processes
 
 ### See: [Cherry Server - Processes](./doc/processes.md)
 
-<hr>
-
 ## Notes
 
 ### See: [Cherry Server - Notes](./doc/notes.md)
 
-<hr>
-
 ## Links
 
 ### See: [Cherry Server - Links](./doc/links.md)
-
-<hr>
