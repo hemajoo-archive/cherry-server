@@ -104,7 +104,7 @@ jobs:
             }]
 
       - name: Build project with Maven
-        run: mvn -B -Dmaven.test.skip=true clean package -f pom.xml -Pjava.17 # Skip tests as a parallel build is done that runs the tests
+        run: mvn -B -Dmaven.test.skip=true clean compile -f pom.xml -Pjava.17 # Skip tests as a parallel build is done that runs the tests
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
