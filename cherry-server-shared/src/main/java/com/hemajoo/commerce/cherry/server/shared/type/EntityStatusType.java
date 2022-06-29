@@ -12,22 +12,22 @@
  * Hemajoo Systems Inc.
  * -----------------------------------------------------------------------------------------------
  */
-package com.hemajoo.commerce.cherry.server.commons.type;
+package com.hemajoo.commerce.cherry.server.shared.type;
 
 /**
  * Enumeration representing the several possible entity status types.
  * @author <a href="mailto:christophe.resse@gmail.com">Christophe Resse</a>
  * @version 1.0.0
  */
-public enum StatusType
+public enum EntityStatusType
 {
     /**
-     * Entity status is <b>active</b>.
+     * Entity has an <b>active</b> status.
      */
     ACTIVE,
 
     /**
-     * Entity status is <b>inactive</b>.
+     * Entity has an <b>inactive</b> status.
      */
     INACTIVE
 }
