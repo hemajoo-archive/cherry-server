@@ -35,17 +35,11 @@
     </scm>
 
     <modules>
-<!--        <module>cherry-server-commons</module>-->
-<!--        <module>cherry-server-document</module>-->
-<!--        <module>cherry-server-person</module>-->
-<!--        <module>cherry-server-organization</module>-->
-<!--        <module>cherry-server-employee</module>-->
-<!--        <module>cherry-server-catalog</module>-->
-<!--        <module>cherry-server-product</module>-->
-<!--        <module>cherry-server-service</module>-->
-<!--        <module>cherry-server-billing</module>-->
-        <module>cherry-server-coverage</module>
         <module>cherry-server-commons</module>
+        <module>cherry-server-data-model</module>
+        <module>cherry-server-shared</module>
+        <module>cherry-server-document</module>
+        <module>cherry-server-coverage</module>
     </modules>
 
     <properties>
@@ -811,6 +805,7 @@
                 </plugins>
             </build>
         </profile>
+
 
         <profile>
             <id>java.8</id>
