@@ -16,7 +16,7 @@ package com.hemajoo.commerce.cherry.server.base.mapper;
 
 import com.hemajoo.commerce.cherry.server.data.model.base.ServerEntity;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.exception.EntityException;
-import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.identity.EntityIdentity;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.identity.Identity;
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -46,7 +46,7 @@ public abstract class AbstractEntityMapper
      * @return Server base entity.
      * @throws EntityException Thrown in case an error occurred while trying to retrieve the entity from the underlying repository.
      */
-    public <T extends ServerEntity> T map(EntityIdentity identity, @Context EntityManager entityManager) throws EntityException
+    public <T extends ServerEntity> T map(Identity identity, @Context EntityManager entityManager) throws EntityException
     {
         ServerEntity entity;
 

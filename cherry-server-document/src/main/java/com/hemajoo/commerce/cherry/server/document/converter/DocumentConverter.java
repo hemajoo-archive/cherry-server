@@ -17,10 +17,11 @@ package com.hemajoo.commerce.cherry.server.document.converter;
 import com.hemajoo.commerce.cherry.server.base.mapper.AbstractDocumentMapper;
 import com.hemajoo.commerce.cherry.server.base.mapper.AbstractEntityMapper;
 import com.hemajoo.commerce.cherry.server.commons.entity.mapper.CycleAvoidingMappingContext;
-import com.hemajoo.commerce.cherry.server.data.model.document.ServerDocument;
+import com.hemajoo.commerce.cherry.server.data.model.document.IServerDocument;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.exception.EntityException;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.identity.EntityIdentity;
-import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.ClientDocument;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.identity.Identity;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.IClientDocument;
 import lombok.Getter;
 import org.springframework.stereotype.Component;
 
@@ -33,7 +34,7 @@ import javax.persistence.PersistenceContext;
  * @version 1.0.0
  */
 @Component
-public class DocumentConverter
+public class DocumentConverter implements IDocumentConverter
 {
     /**
      * Entity manager.
@@ -47,7 +48,7 @@ public class DocumentConverter
      * @param server Server document entity.
      * @return Entity identity.
      */
-    public EntityIdentity fromServerToIdentity(ServerDocument server)
+    public EntityIdentity fromServerToIdentity(final IServerDocument server)
     {
         return AbstractDocumentMapper.INSTANCE.fromServerToIdentity(server, new CycleAvoidingMappingContext());
     }
@@ -58,7 +59,7 @@ public class DocumentConverter
      * @return Server document entity.
      * @throws EntityException Thrown to indicate an error occurred when trying to convert a document.
      */
-    public ServerDocument fromIdentityToServer(EntityIdentity identity) throws EntityException
+    public IServerDocument fromIdentityToServer(Identity identity) throws EntityException
     {
         return AbstractEntityMapper.INSTANCE.map(identity, entityManager);
     }
@@ -69,7 +70,7 @@ public class DocumentConverter
      * @return Server document entity.
      * @throws EntityException Thrown to indicate an error occurred when trying to convert a document.
      */
-    public ServerDocument fromClientToServer(ClientDocument client) throws EntityException
+    public IServerDocument fromClientToServer(IClientDocument client) throws EntityException
     {
         return AbstractDocumentMapper.INSTANCE.fromClientToServer(client, new CycleAvoidingMappingContext(), entityManager);
     }
@@ -79,7 +80,7 @@ public class DocumentConverter
      * @param server Server document entity.
      * @return Client document entity.
      */
-    public ClientDocument fromServerToClient(ServerDocument server)
+    public IClientDocument fromServerToClient(IServerDocument server)
     {
         return AbstractDocumentMapper.INSTANCE.fromServerToClient(server, new CycleAvoidingMappingContext());
     }
@@ -90,7 +91,7 @@ public class DocumentConverter
      * @return Copied server document entity.
      * @throws EntityException Thrown to indicate an error occurred when trying to copy a document.
      */
-    public static ServerDocument copy(ServerDocument server) throws EntityException
+    public static IServerDocument copy(IServerDocument server) throws EntityException
     {
         return AbstractDocumentMapper.INSTANCE.copy(server, new CycleAvoidingMappingContext());
     }
@@ -101,7 +102,7 @@ public class DocumentConverter
      * @return Copied client document entity.
      * @throws EntityException Thrown to indicate an error occurred when trying to copy a document.
      */
-    public static ClientDocument copy(ClientDocument client) throws EntityException
+    public static IClientDocument copy(IClientDocument client) throws EntityException
     {
         return AbstractDocumentMapper.INSTANCE.copy(client, new CycleAvoidingMappingContext());
     }

@@ -140,7 +140,7 @@ public class DocumentService implements IDocumentService
             throw new DocumentException(String.format("Document with id: '%s' not found!", document.getId()));
         }
 
-        ClientDocument original =  converter.fromServerToClient(serverDocument);
+        ClientDocument original = (ClientDocument) converter.fromServerToClient(serverDocument);
 
         LOGGER.debug(String.format("%s detecting changes on properties...", document.getIdentity()));
         List<ValueChange> changes = filterDocumentChanges(getPropertyChanges(original, document), DocumentFilterMetadata.build());

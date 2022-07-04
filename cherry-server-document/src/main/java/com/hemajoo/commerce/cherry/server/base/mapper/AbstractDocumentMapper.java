@@ -15,10 +15,12 @@
 package com.hemajoo.commerce.cherry.server.base.mapper;
 
 import com.hemajoo.commerce.cherry.server.commons.entity.mapper.CycleAvoidingMappingContext;
+import com.hemajoo.commerce.cherry.server.data.model.document.IServerDocument;
 import com.hemajoo.commerce.cherry.server.data.model.document.ServerDocument;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.exception.EntityException;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.identity.EntityIdentity;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.ClientDocument;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.IClientDocument;
 import org.mapstruct.Context;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
@@ -27,6 +29,9 @@ import javax.persistence.EntityManager;
 
 /**
  * Abstract document <b>mapper</b> (used by a document <b>converter</b>) to convert between client and server document instances.
+ * <br><br>
+ * <b>Note:</b><br>
+ * Due to the nature of <b>MapStruct</b>, we must return concrete classes and not interfaces!
  * @author <a href="mailto:christophe.resse@gmail.com">Christophe Resse</a>
  * @version 1.0.0
  */
@@ -44,7 +49,7 @@ public abstract class AbstractDocumentMapper
      * @param context Context object.
      * @return Entity identity.
      */
-    public abstract EntityIdentity fromServerToIdentity(ServerDocument entity, @Context CycleAvoidingMappingContext context);
+    public abstract EntityIdentity fromServerToIdentity(IServerDocument entity, @Context CycleAvoidingMappingContext context);
 
     /**
      * Maps from a server document entity to a client document entity.
@@ -54,7 +59,7 @@ public abstract class AbstractDocumentMapper
      * @return Client document entity.
      * @throws EntityException Thrown to indicate an error occurred while trying to convert a document entity.
      */
-    public abstract ServerDocument fromClientToServer(ClientDocument document, @Context CycleAvoidingMappingContext context, @Context EntityManager entityManager) throws EntityException;
+    public abstract ServerDocument fromClientToServer(IClientDocument document, @Context CycleAvoidingMappingContext context, @Context EntityManager entityManager) throws EntityException;
 
     /**
      * Maps from a server document entity to a client document entity.
@@ -62,7 +67,7 @@ public abstract class AbstractDocumentMapper
      * @param context Context object.
      * @return Client document entity.
      */
-    public abstract ClientDocument fromServerToClient(ServerDocument document, @Context CycleAvoidingMappingContext context);
+    public abstract ClientDocument fromServerToClient(IServerDocument document, @Context CycleAvoidingMappingContext context);
 
     /**
      * Copy a server document entity.
@@ -71,7 +76,7 @@ public abstract class AbstractDocumentMapper
      * @return Copy of the server document entity.
      * @throws EntityException Thrown to indicate an error occurred while trying to copy a document entity.
      */
-    public abstract ServerDocument copy(ServerDocument entity, @Context CycleAvoidingMappingContext context) throws EntityException;
+    public abstract ServerDocument copy(IServerDocument entity, @Context CycleAvoidingMappingContext context) throws EntityException;
 
     /**
      * Copy a client document entity.
@@ -80,5 +85,5 @@ public abstract class AbstractDocumentMapper
      * @return Copy of the client document entity.
      * @throws EntityException Thrown to indicate an error occurred while trying to copy a document entity.
      */
-    public abstract ClientDocument copy(ClientDocument entity, @Context CycleAvoidingMappingContext context) throws EntityException;
+    public abstract ClientDocument copy(IClientDocument entity, @Context CycleAvoidingMappingContext context) throws EntityException;
 }
