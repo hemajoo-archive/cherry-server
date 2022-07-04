@@ -15,7 +15,7 @@ import javax.persistence.EntityManager;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2022-07-04T14:07:30+0200",
+    date = "2022-07-04T14:56:46+0200",
     comments = "version: 1.5.2.Final, compiler: javac, environment: Java 17.0.2 (Oracle Corporation)"
 )
 public class AbstractDocumentMapperImpl extends AbstractDocumentMapper {
