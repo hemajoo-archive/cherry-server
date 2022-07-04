@@ -40,6 +40,7 @@
         <module>cherry-server-shared</module>
         <module>cherry-server-document</module>
         <module>cherry-server-coverage</module>
+        <module>cherry-server-person</module>
     </modules>
 
     <properties>
@@ -75,7 +76,7 @@
         <version.plugin.maven.jacoco>0.8.7</version.plugin.maven.jacoco>
 
         <!-- Spring Boot properties -->
-        <version.spring.boot>2.6.4</version.spring.boot>
+        <version.spring.boot>2.7.0</version.spring.boot>
 
         <!-- Dependencies version properties -->
         <version.ressec.avocado>0.1.0</version.ressec.avocado>

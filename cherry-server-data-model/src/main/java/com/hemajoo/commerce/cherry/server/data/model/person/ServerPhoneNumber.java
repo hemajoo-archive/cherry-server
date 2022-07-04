@@ -17,9 +17,9 @@ package com.hemajoo.commerce.cherry.server.data.model.person;
 import com.hemajoo.commerce.cherry.server.data.model.base.IServerEntity;
 import com.hemajoo.commerce.cherry.server.data.model.base.ServerEntity;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.EntityType;
-import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.address.postal.IPostalAddress;
-import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.address.postal.type.PostalAddressCategoryType;
-import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.address.type.AddressType;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.phone.IPhoneNumber;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.phone.type.PhoneNumberCategoryType;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.phone.type.PhoneNumberType;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -30,72 +30,55 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
- * Represents a server postal address entity.
+ * Represents a server phone number entity.
  * @author <a href="mailto:christophe.resse@gmail.com">Christophe Resse</a>
  * @version 1.0.0
  */
 @ToString(callSuper = false)
 @EqualsAndHashCode(callSuper = false)
-@Table(name = "POSTAL_ADDRESS")
+@Table(name = "PHONE_NUMBER")
 @Entity
 @EntityListeners(AuditingEntityListener.class)
-public class PostalAddressServer extends ServerEntity implements IPostalAddress, IServerEntity
+public class ServerPhoneNumber extends ServerEntity implements IPhoneNumber, IServerEntity
 {
     /**
-     * Postal address street name.
+     * Phone number.
      */
     @Getter
     @Setter
-    @NotNull(message = "Postal address: 'streetName' cannot be null!")
-    @Column(name = "STREET_NAME")
-    private String streetName;
+    @NotNull(message = "Phone number: 'phoneNumber' cannot be null!")
+    @Column(name = "PHONE_NUMBER", length = 30)
+    private String number;
 
     /**
-     * Postal address street number.
+     * Phone number country code (ISO Alpha-3 code).
      */
     @Getter
     @Setter
-    @NotNull(message = "Postal address: 'streetNumber' cannot be null!")
-    @Column(name = "STREET_NUMBER")
-    private String streetNumber;
-
-    /**
-     * Postal address locality.
-     */
-    @Getter
-    @Setter
-    @NotNull(message = "Postal address: 'locality' cannot be null!")
-    @Column(name = "LOCALITY")
-    private String locality;
-
-    /**
-     * Postal address country code (ISO Alpha-3 code).
-     */
-    @Getter
-    @Setter
-    @NotNull(message = "Postal address: 'countryCode' cannot be null!")
+    @NotNull(message = "Phone number: 'countryCode' cannot be null!")
     @Column(name = "COUNTRY_CODE", length = 3)
     private String countryCode;
 
     /**
-     * Postal address zip (postal) code.
+     * Phone number type.
      */
     @Getter
     @Setter
-    @NotNull(message = "Postal address: 'zipCode' cannot be null!")
-    @Column(name = "ZIP_CODE", length = 10)
-    private String zipCode;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "PHONE_TYPE")
+    private PhoneNumberType phoneType;
 
     /**
-     * Postal address area/region/department depending on the country.
+     * Phone number category type.
      */
     @Getter
     @Setter
-    @Column(name = "AREA")
-    private String area;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "CATEGORY_TYPE")
+    private PhoneNumberCategoryType categoryType;
 
     /**
-     * Is it a default postal address?
+     * Is it a default phone number?
      */
     @Getter
     @Setter
@@ -103,28 +86,10 @@ public class PostalAddressServer extends ServerEntity implements IPostalAddress,
     private Boolean isDefault;
 
     /**
-     * Postal address type.
+     * The person identifier this phone number belongs to.
      */
-    @Getter
-    @Setter
-    @Enumerated(EnumType.STRING)
-    @Column(name = "ADDRESS_TYPE")
-    private AddressType addressType;
-
-    /**
-     * Postal address category type.
-     */
-    @Getter
-    @Setter
-    @Enumerated(EnumType.STRING)
-    @Column(name = "CATEGORY_TYPE")
-    private PostalAddressCategoryType categoryType;
-
-    /**
-     * The person identifier this postal address belongs to.
-     */
-    @ToString.Exclude
     @EqualsAndHashCode.Exclude
+    @ToString.Exclude
     @Getter
     @Setter
     @ManyToOne(targetEntity = ServerPerson.class, fetch = FetchType.LAZY)
@@ -132,10 +97,10 @@ public class PostalAddressServer extends ServerEntity implements IPostalAddress,
     private ServerPerson person;
 
     /**
-     * Creates a new postal address.
+     * Creates a new phone number.
      */
-    public PostalAddressServer()
+    public ServerPhoneNumber()
     {
-        super(EntityType.POSTAL_ADDRESS);
+        super(EntityType.PHONE_NUMBER);
     }
 }

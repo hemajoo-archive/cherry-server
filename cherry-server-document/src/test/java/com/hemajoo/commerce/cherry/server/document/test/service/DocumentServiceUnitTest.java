@@ -15,16 +15,17 @@
 package com.hemajoo.commerce.cherry.server.document.test.service;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.hemajoo.commerce.cherry.server.commons.entity.query.condition.QueryCondition;
+import com.hemajoo.commerce.cherry.server.commons.entity.query.condition.QueryConditionException;
 import com.hemajoo.commerce.cherry.server.data.model.document.ServerDocument;
+import com.hemajoo.commerce.cherry.server.document.query.DocumentQuery;
 import com.hemajoo.commerce.cherry.server.document.randomizer.DocumentRandomizer;
+import com.hemajoo.commerce.cherry.server.document.service.IDocumentService;
 import com.hemajoo.commerce.cherry.server.document.test.base.AbstractPostgresUnitTest;
-import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.query.condition.QueryCondition;
-import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.query.condition.QueryConditionException;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.EntityStatusType;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.QueryOperatorType;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.exception.DocumentException;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.type.DocumentType;
-import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.address.email.query.EmailAddressQuery;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,10 +63,10 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss.SSS z");
 
     /**
-     * Person services.
+     * Document service.
      */
     @Autowired
-    private ServiceFactoryPerson servicePerson;
+    private IDocumentService documentService;
 
     /**
      * Prepare before each test.
@@ -80,7 +81,7 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
         // Generate 100 test documents
         for (int i = 0; i < 100; i++)
         {
-            document = servicePerson.getDocumentService().save(DocumentRandomizer.generateServerEntity(false));
+            document = documentService.save(DocumentRandomizer.generateServerEntity(false));
         }
     }
 
@@ -91,11 +92,11 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
     @AfterEach
     public void afterEach() throws DocumentException
     {
-        for (ServerDocument document : servicePerson.getDocumentService().findAll())
+        for (ServerDocument document : documentService.findAll())
         {
             try
             {
-                servicePerson.getDocumentService().deleteById(document.getId());
+                documentService.deleteById(document.getId());
             }
             catch (EmptyResultDataAccessException e)
             {
@@ -108,7 +109,7 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
     @DisplayName("Create a document")
     void testCreateDocument() throws DocumentException
     {
-        ServerDocument document = servicePerson.getDocumentService().save(DocumentRandomizer.generateServerEntity(false));
+        ServerDocument document = documentService.save(DocumentRandomizer.generateServerEntity(false));
 
         assertThat(document)
                 .as("Document should not be null!")
@@ -123,8 +124,8 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
     @DisplayName("Ensure we cannot set a document as being the parent of another document")
     void testSetDocumentAsParentOfDocument() throws DocumentException
     {
-        ServerDocument parent = servicePerson.getDocumentService().save(DocumentRandomizer.generateServerEntity(false));
-        ServerDocument child = servicePerson.getDocumentService().save(DocumentRandomizer.generateServerEntity(false));
+        ServerDocument parent = documentService.save(DocumentRandomizer.generateServerEntity(false));
+        ServerDocument child = documentService.save(DocumentRandomizer.generateServerEntity(false));
 
         assertThat(parent)
                 .as("Parent document should not be null!")
@@ -148,7 +149,7 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
     @DisplayName("Update a document")
     void testUpdateDocument() throws DocumentException
     {
-        ServerDocument document = servicePerson.getDocumentService().save(DocumentRandomizer.generateServerEntity(false));
+        ServerDocument document = documentService.save(DocumentRandomizer.generateServerEntity(false));
 
         assertThat(document)
                 .as("Document should not be null!")
@@ -160,9 +161,9 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
 
         String description = document.getDescription();
         document.setDescription("Test description for document: " + document.getId());
-        servicePerson.getDocumentService().saveAndFlush(document);
+        documentService.saveAndFlush(document);
 
-        ServerDocument updated = servicePerson.getDocumentService().findById(document.getId());
+        ServerDocument updated = documentService.findById(document.getId());
 
         assertThat(updated)
                 .as("Document should not be null!")
@@ -177,7 +178,7 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
     @DisplayName("Delete a document")
     void testDeleteDocument() throws DocumentException
     {
-        ServerDocument document = servicePerson.getDocumentService().save(DocumentRandomizer.generateServerEntity(false));
+        ServerDocument document = documentService.save(DocumentRandomizer.generateServerEntity(false));
 
         assertThat(document)
                 .as("Document should not be null!")
@@ -187,9 +188,9 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
                 .as("Document identifier should not be null!")
                 .isNotNull();
 
-        servicePerson.getDocumentService().deleteById(document.getId());
+        documentService.deleteById(document.getId());
 
-        assertThat(servicePerson.getDocumentService().findById(document.getId()))
+        assertThat(documentService.findById(document.getId()))
                 .as("Document should be null!")
                 .isNull();
     }
@@ -201,7 +202,7 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
         try
         {
             new DocumentQuery().addCondition(QueryCondition.builder()
-                    .withField(EmailAddressQuery.EMAIL_ADDRESS_EMAIL)
+                    .withField(DocumentQuery.DOCUMENT_CONTENT_PATH)
                     .withValue("john.doe@gmail.com")
                     .withOperator(QueryOperatorType.EQUAL)
                     .build());
@@ -232,7 +233,7 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
                         .withOperator(QueryOperatorType.BETWEEN)
                         .build());
 
-        List<ServerDocument> documents = servicePerson.getDocumentService().search(search);
+        List<ServerDocument> documents = documentService.search(search);
         assertThat(documents)
                 .as("Document list should not be empty!")
                 .isNotEmpty();
@@ -264,7 +265,7 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
                         .withOperator(QueryOperatorType.EQUAL)
                         .build());
 
-        List<ServerDocument> documents = servicePerson.getDocumentService().search(search);
+        List<ServerDocument> documents = documentService.search(search);
         assertThat(documents)
                 .as("Document list should not be empty!")
                 .isNotEmpty();
@@ -298,7 +299,7 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
                         .withOperator(QueryOperatorType.BETWEEN)
                         .build());
 
-        List<ServerDocument> documents = servicePerson.getDocumentService().search(search);
+        List<ServerDocument> documents = documentService.search(search);
         assertThat(documents)
                 .as("Document list should not be empty!")
                 .isNotEmpty();
@@ -306,8 +307,8 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
         for (ServerDocument document : documents)
         {
             assertThat(document.getStatusType())
-                    .as(String.format("Document status type should be: '%s'", StatusType.INACTIVE))
-                    .isEqualTo(StatusType.INACTIVE);
+                    .as(String.format("Document status type should be: '%s'", EntityStatusType.INACTIVE))
+                    .isEqualTo(EntityStatusType.INACTIVE);
             assertThat(document.getSince())
                     .as(String.format("Document inactive (since) date should be greater or equal to: '%s' and less or equal to: '%s'", DOCUMENT_DATE_LOW, DOCUMENT_DATE_HIGH))
                     .isBetween(Date.from(DOCUMENT_DATE_LOW.toInstant()), Date.from(DOCUMENT_DATE_HIGH));
@@ -327,7 +328,7 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
                         .withOperator(QueryOperatorType.CONTAINS)
                         .build());
 
-        List<ServerDocument> documents = servicePerson.getDocumentService().search(search);
+        List<ServerDocument> documents = documentService.search(search);
         assertThat(documents)
                 .as("Document list should not be empty!")
                 .isNotEmpty();
@@ -355,7 +356,7 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
                         .withOperator(QueryOperatorType.BETWEEN)
                         .build());
 
-        List<ServerDocument> documents = servicePerson.getDocumentService().search(search);
+        List<ServerDocument> documents = documentService.search(search);
         assertThat(documents)
                 .as("Document list should not be empty!")
                 .isNotEmpty();
@@ -381,7 +382,7 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
                         .withOperator(QueryOperatorType.GREATER_THAN_EQUAL)
                         .build());
 
-        List<ServerDocument> documents = servicePerson.getDocumentService().search(search);
+        List<ServerDocument> documents = documentService.search(search);
         assertThat(documents)
                 .as("Document list should not be empty!")
                 .isNotEmpty();
@@ -407,7 +408,7 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
                         .withOperator(QueryOperatorType.EQUAL)
                         .build());
 
-        List<ServerDocument> documents = servicePerson.getDocumentService().search(search);
+        List<ServerDocument> documents = documentService.search(search);
         assertThat(documents)
                 .as("Document list should not be empty!")
                 .isNotEmpty();
@@ -433,7 +434,7 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
                         .withOperator(QueryOperatorType.EQUAL)
                         .build());
 
-        List<ServerDocument> documents = servicePerson.getDocumentService().search(search);
+        List<ServerDocument> documents = documentService.search(search);
         assertThat(documents)
                 .as("Document list should not be empty!")
                 .isNotEmpty();

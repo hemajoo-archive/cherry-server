@@ -12,112 +12,83 @@
  * Hemajoo Systems Inc.
  * -----------------------------------------------------------------------------------------------
  */
-package com.hemajoo.commerce.cherry.server.data.model.person;
+package com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.address.postal;
 
-import com.hemajoo.commerce.cherry.server.data.model.base.IServerEntity;
-import com.hemajoo.commerce.cherry.server.data.model.base.ServerEntity;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.ClientEntity;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.identity.Identity;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.EntityType;
-import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.address.postal.IPostalAddress;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.address.postal.type.PostalAddressCategoryType;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.address.type.AddressType;
+import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
 import lombok.ToString;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 
 /**
- * Represents a server postal address entity.
+ * Provides an implementation of a postal address client data model entity.
  * @author <a href="mailto:christophe.resse@gmail.com">Christophe Resse</a>
  * @version 1.0.0
  */
-@ToString(callSuper = false)
+@Data
+//@Builder(setterPrefix = "with") // Does not work well with MapStruct!
 @EqualsAndHashCode(callSuper = false)
-@Table(name = "POSTAL_ADDRESS")
-@Entity
-@EntityListeners(AuditingEntityListener.class)
-public class PostalAddressServer extends ServerEntity implements IPostalAddress, IServerEntity
+public class ClientPostalAddress extends ClientEntity implements IClientPostalAddress
 {
     /**
      * Postal address street name.
      */
-    @Getter
-    @Setter
-    @NotNull(message = "Postal address: 'streetName' cannot be null!")
-    @Column(name = "STREET_NAME")
+    @Schema(name = "name", description = "Postal address street name", example = "Rue de la Libération")
     private String streetName;
 
     /**
      * Postal address street number.
      */
-    @Getter
-    @Setter
-    @NotNull(message = "Postal address: 'streetNumber' cannot be null!")
-    @Column(name = "STREET_NUMBER")
+    @Schema(name = "number", description = "Postal address street number", example = "18 bis")
     private String streetNumber;
 
     /**
      * Postal address locality.
      */
-    @Getter
-    @Setter
-    @NotNull(message = "Postal address: 'locality' cannot be null!")
-    @Column(name = "LOCALITY")
+    @Schema(name = "locality", description = "Postal address locality (city)", example = "Paris")
     private String locality;
 
     /**
      * Postal address country code (ISO Alpha-3 code).
      */
-    @Getter
-    @Setter
-    @NotNull(message = "Postal address: 'countryCode' cannot be null!")
-    @Column(name = "COUNTRY_CODE", length = 3)
+    @Schema(name = "countryCode", description = "Postal address country code (ISO Alpha-3)", example = "FRA")
     private String countryCode;
 
     /**
      * Postal address zip (postal) code.
      */
-    @Getter
-    @Setter
-    @NotNull(message = "Postal address: 'zipCode' cannot be null!")
-    @Column(name = "ZIP_CODE", length = 10)
+    @Schema(name = "zipCode", description = "Postal address zip code (postal code)", example = "75000")
     private String zipCode;
 
     /**
      * Postal address area/region/department depending on the country.
      */
-    @Getter
-    @Setter
-    @Column(name = "AREA")
+    @Schema(name = "area", description = "Postal address area (region/state)", example = "Île-de-France")
     private String area;
 
     /**
      * Is it a default postal address?
      */
-    @Getter
-    @Setter
-    @Column(name = "IS_DEFAULT")
+    @Schema(name = "isDefault", description = "Is it a default postal address ?", example = "true")
     private Boolean isDefault;
 
     /**
      * Postal address type.
      */
-    @Getter
-    @Setter
-    @Enumerated(EnumType.STRING)
-    @Column(name = "ADDRESS_TYPE")
+    @Schema(name = "addressType", description = "Postal address type", example = "PRIVATE")
+    //@Enumerated(EnumType.STRING)
     private AddressType addressType;
 
     /**
-     * Postal address category type.
+     * Postal address category.
      */
-    @Getter
-    @Setter
-    @Enumerated(EnumType.STRING)
-    @Column(name = "CATEGORY_TYPE")
+    @Schema(name = "categoryType", description = "Postal address category type", example = "POSTAL")
+    //@Enumerated(EnumType.STRING)
     private PostalAddressCategoryType categoryType;
 
     /**
@@ -125,16 +96,14 @@ public class PostalAddressServer extends ServerEntity implements IPostalAddress,
      */
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
-    @Getter
-    @Setter
-    @ManyToOne(targetEntity = ServerPerson.class, fetch = FetchType.LAZY)
-    @JoinColumn(name = "PERSON_ID", nullable = false)
-    private ServerPerson person;
+    @JsonIgnoreProperties("postalAddresses")
+    @Schema(name = "owner", description = "Entity identity this postal address belongs to", example = "1")
+    private Identity owner;
 
     /**
      * Creates a new postal address.
      */
-    public PostalAddressServer()
+    public ClientPostalAddress()
     {
         super(EntityType.POSTAL_ADDRESS);
     }

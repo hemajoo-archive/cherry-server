@@ -15,14 +15,15 @@
 package com.hemajoo.commerce.cherry.server.data.model.person;
 
 import com.hemajoo.commerce.cherry.server.data.model.base.IServerEntity;
-import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.IPerson;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.address.email.IEmailAddress;
 
 /**
- * Behavior of a server person entity.
+ * Interface providing the behavior of a server email address entity.
  * @author <a href="mailto:christophe.resse@gmail.com">Christophe Resse</a>
+ * @since Cherry 0.1.0
  * @version 1.0.0
  */
-public interface IServerPerson extends IPerson, IServerEntity
+public interface IServerEmailAddress extends IEmailAddress, IServerEntity
 {
     // Marker interface
 }

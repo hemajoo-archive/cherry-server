@@ -15,14 +15,14 @@
 package com.hemajoo.commerce.cherry.server.data.model.person;
 
 import com.hemajoo.commerce.cherry.server.data.model.base.IServerEntity;
-import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.IPerson;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.address.postal.IPostalAddress;
 
 /**
- * Behavior of a server person entity.
+ * Behavior of a server postal address entity.
  * @author <a href="mailto:christophe.resse@gmail.com">Christophe Resse</a>
  * @version 1.0.0
  */
-public interface IServerPerson extends IPerson, IServerEntity
+public interface IServerPostalAddress extends IPostalAddress, IServerEntity
 {
     // Marker interface
 }

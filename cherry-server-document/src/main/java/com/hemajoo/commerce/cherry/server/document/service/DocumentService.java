@@ -15,17 +15,22 @@
 package com.hemajoo.commerce.cherry.server.document.service;
 
 import com.hemajoo.commerce.cherry.server.base.filter.IEntityFilter;
-import com.hemajoo.commerce.cherry.server.data.model.base.ServerEntity;
+import com.hemajoo.commerce.cherry.server.commons.entity.query.AbstractQueryStatus;
+import com.hemajoo.commerce.cherry.server.commons.entity.query.BaseQueryEntity;
+import com.hemajoo.commerce.cherry.server.commons.entity.query.GenericSpecification;
+import com.hemajoo.commerce.cherry.server.commons.entity.query.condition.QueryConditionException;
 import com.hemajoo.commerce.cherry.server.data.model.document.ServerDocument;
 import com.hemajoo.commerce.cherry.server.document.converter.DocumentConverter;
 import com.hemajoo.commerce.cherry.server.document.filter.DocumentFilterMetadata;
+import com.hemajoo.commerce.cherry.server.document.query.DocumentQuery;
 import com.hemajoo.commerce.cherry.server.document.repository.IDocumentRepository;
 import com.hemajoo.commerce.cherry.server.document.store.DocumentStore;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.exception.EntityException;
-import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.query.GenericSpecification;
-import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.query.condition.QueryConditionException;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.EntityStatusType;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.EntityType;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.ClientDocument;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.exception.DocumentException;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.type.DocumentType;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.extern.log4j.Log4j2;
@@ -36,7 +41,6 @@ import org.javers.core.JaversBuilder;
 import org.javers.core.diff.changetype.ValueChange;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -88,12 +92,12 @@ public class DocumentService implements IDocumentService
      */
     private DocumentConverter converter = new DocumentConverter();
 
-    /**
-     * Entity factory.
-     */
-    @Getter
-    @Autowired
-    private EntityFactory factory;
+//    /**
+//     * Entity factory.
+//     */
+//    @Getter
+//    @Autowired
+//    private EntityFactory factory;
 
     @Override
     public IDocumentRepository getRepository()
@@ -133,7 +137,7 @@ public class DocumentService implements IDocumentService
         ServerDocument serverDocument = documentRepository.findById(document.getId()).orElse(null);
         if (serverDocument == null)
         {
-            throw new DocumentException(String.format("Document with id: '%s' not found!", document.getId()), HttpStatus.NOT_FOUND);
+            throw new DocumentException(String.format("Document with id: '%s' not found!", document.getId()));
         }
 
         ClientDocument original =  converter.fromServerToClient(serverDocument);
@@ -253,24 +257,26 @@ public class DocumentService implements IDocumentService
                 case DocumentQuery.DOCUMENT_TYPE ->
                         documentServer.setDocumentType((DocumentType) change.getRight());
 
-                case BaseEntityQuery.BASE_DESCRIPTION ->
+                case BaseQueryEntity.BASE_DESCRIPTION ->
                         documentServer.setDescription((String) change.getRight());
 
-                case BaseEntityQuery.BASE_NAME ->
+                case BaseQueryEntity.BASE_NAME ->
                         documentServer.setName((String) change.getRight());
 
-                case BaseEntityQuery.BASE_REFERENCE ->
+                case BaseQueryEntity.BASE_REFERENCE ->
                         documentServer.setReference((String) change.getRight());
 
-                case AbstractStatusQuery.BASE_STATUS_TYPE ->
-                        documentServer.setStatusType((StatusType) change.getRight());
+                case AbstractQueryStatus.BASE_STATUS_TYPE ->
+                        documentServer.setStatusType((EntityStatusType) change.getRight());
 
-                case BaseEntityQuery.BASE_PARENT_TYPE ->
+                case BaseQueryEntity.BASE_PARENT_TYPE ->
                         documentServer.setParentType((EntityType) change.getRight());
 
-                case BaseEntityQuery.BASE_PARENT_ID -> {
-                    ServerEntity parent = (ServerEntity) factory.from(documentServer.getParentType(), UUID.fromString((String) change.getRight()));
-                    documentServer.setParent(parent);
+                case BaseQueryEntity.BASE_PARENT_ID -> {
+                    //ServerEntity parent = (ServerEntity) factory.from(documentServer.getParentType(), UUID.fromString((String) change.getRight()));
+                    //documentServer.setParent(parent);
+                    // TODO Find another solution!
+                    throw new EntityException(String.format("Not yet implemented handling field of type: %s", change.getPropertyName()));
                 }
 
                 default -> throw new DocumentException(String.format("Document property change for property name: '%s' is not handled!", change.getPropertyName()));
@@ -329,7 +335,7 @@ public class DocumentService implements IDocumentService
 
         if (document == null)
         {
-            throw new DocumentException(String.format("Document with id: '%s' cannot be found!", id.toString()), HttpStatus.NOT_FOUND);
+            throw new DocumentException(String.format("Document with id: '%s' cannot be found!", id.toString()));
         }
 
         // If a content file is associated, then delete it!
@@ -373,11 +379,11 @@ public class DocumentService implements IDocumentService
             loadContent(document);
         }
 
-        throw new DocumentException(String.format("Document with id: '%s' cannot be found!", documentId.toString()), HttpStatus.NOT_FOUND);
+        throw new DocumentException(String.format("Document with id: '%s' cannot be found!", documentId.toString()));
     }
 
     @Override
-    public List<DocumentServer> search(@NonNull DocumentQuery search) throws QueryConditionException
+    public List<ServerDocument> search(@NonNull DocumentQuery search) throws QueryConditionException
     {
         List<ServerDocument> documents;
 

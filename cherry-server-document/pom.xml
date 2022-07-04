@@ -92,8 +92,6 @@
             <optional>true</optional>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter -->
-        <!-- Provides everything you need to write JUnit 5 Jupiter tests. -->
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
@@ -127,19 +125,17 @@
             <artifactId>postgresql</artifactId>
         </dependency>
 
-        <!-- Flyway dependencies -->
         <dependency>
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
         </dependency>
 
-        <!-- Bean mapper: MapStruct -->
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
         </dependency>
 
-        <!-- Lombok's annotation processing for MapStruct -->
+        <!-- Specifics when using Lombok with MapStruct -->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok-mapstruct-binding</artifactId>
@@ -158,17 +154,17 @@
             <artifactId>javers-core</artifactId>
         </dependency>
 
-        <!-- Cherry Server - Common entities -->
+        <!-- Cherry Server - Data Model -->
         <dependency>
             <groupId>${project.groupId}</groupId>
             <artifactId>cherry-server-data-model</artifactId>
             <version>${project.version}</version>
         </dependency>
 
-        <!-- Cherry Server - Shared entities -->
+<!--        &lt;!&ndash; Cherry Server - Commons &ndash;&gt;-->
 <!--        <dependency>-->
 <!--            <groupId>${project.groupId}</groupId>-->
-<!--            <artifactId>cherry-server-shared</artifactId>-->
+<!--            <artifactId>cherry-server-commons</artifactId>-->
 <!--            <version>${project.version}</version>-->
 <!--        </dependency>-->
 
@@ -196,24 +192,5 @@
         </dependency>
 
     </dependencies>
-
-    <build>
-
-        <!-- Allow resource filtering for variable substitution -->
-        <resources>
-
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-
-            <resource>
-                <directory>src/test/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-
-        </resources>
-
-    </build>
 
 </project>

@@ -15,18 +15,18 @@
 package com.hemajoo.commerce.cherry.server.data.model.person;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.hemajoo.commerce.cherry.backend.commons.type.EntityType;
-import com.hemajoo.commerce.cherry.backend.commons.type.StatusType;
-import com.hemajoo.commerce.cherry.backend.persistence.base.entity.IServerEntity;
-import com.hemajoo.commerce.cherry.backend.persistence.base.entity.ServerEntity;
-import com.hemajoo.commerce.cherry.backend.shared.base.entity.EntityException;
-import com.hemajoo.commerce.cherry.backend.shared.person.GenderType;
-import com.hemajoo.commerce.cherry.backend.shared.person.PersonType;
-import com.hemajoo.commerce.cherry.backend.shared.person.address.AddressType;
-import com.hemajoo.commerce.cherry.backend.shared.person.address.email.EmailAddressException;
-import com.hemajoo.commerce.cherry.backend.shared.person.phone.PhoneNumberType;
+import com.hemajoo.commerce.cherry.server.data.model.base.IServerEntity;
+import com.hemajoo.commerce.cherry.server.data.model.base.ServerEntity;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.exception.EntityException;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.EntityStatusType;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.EntityType;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.address.email.exception.EmailAddressException;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.address.type.AddressType;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.phone.type.PhoneNumberType;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.type.GenderType;
 import io.swagger.v3.oas.annotations.Hidden;
 import lombok.*;
+import me.xdrop.jrand.model.person.PersonType;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
@@ -109,8 +109,8 @@ public class ServerPerson extends ServerEntity implements IServerPerson, IServer
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @JsonIgnoreProperties("person")
-    @OneToMany(targetEntity = PhoneNumberServer.class, mappedBy = "person", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<PhoneNumberServer> phoneNumbers = new ArrayList<>();
+    @OneToMany(targetEntity = ServerPhoneNumber.class, mappedBy = "person", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<ServerPhoneNumber> phoneNumbers = new ArrayList<>();
 
     /**
      * Email addresses associated to the person.
@@ -121,8 +121,8 @@ public class ServerPerson extends ServerEntity implements IServerPerson, IServer
     @EqualsAndHashCode.Exclude
     @JsonIgnoreProperties("owner")
 //    @OneToMany(targetEntity = ServerEmailAddressEntity.class, mappedBy = "person", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    @OneToMany(targetEntity = EmailAddressServer.class, mappedBy = "parent", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<EmailAddressServer> emailAddresses = new ArrayList<>();
+    @OneToMany(targetEntity = ServerEmailAddress.class, mappedBy = "parent", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ServerEmailAddress> emailAddresses = new ArrayList<>();
 
     /**
      * Creates a new person.
@@ -156,10 +156,10 @@ public class ServerPerson extends ServerEntity implements IServerPerson, IServer
      * Returns the default email address.
      * @return Optional default email address.
      */
-    public final EmailAddressServer getDefaultEmailAddress()
+    public final ServerEmailAddress getDefaultEmailAddress()
     {
         return emailAddresses.stream()
-                .filter(EmailAddressServer::getIsDefaultEmail).findFirst().orElse(null);
+                .filter(ServerEmailAddress::getIsDefaultEmail).findFirst().orElse(null);
     }
 
     /**
@@ -168,7 +168,7 @@ public class ServerPerson extends ServerEntity implements IServerPerson, IServer
      */
     public final boolean hasDefaultEmailAddress()
     {
-        return emailAddresses.stream().anyMatch(EmailAddressServer::getIsDefaultEmail);
+        return emailAddresses.stream().anyMatch(ServerEmailAddress::getIsDefaultEmail);
     }
 
     /**
@@ -187,7 +187,7 @@ public class ServerPerson extends ServerEntity implements IServerPerson, IServer
      * @param emailAddress Email address to check.
      * @return {@code True} if it already exist, {@code false} otherwise.
      */
-    public final boolean existEmailAddress(final @NonNull EmailAddressServer emailAddress) // TODO Not sure it is necessary? Provide a test case.
+    public final boolean existEmailAddress(final @NonNull ServerEmailAddress emailAddress) // TODO Not sure it is necessary? Provide a test case.
     {
         return emailAddresses.stream()
                 .anyMatch(e -> e.equals(emailAddress));
@@ -198,7 +198,7 @@ public class ServerPerson extends ServerEntity implements IServerPerson, IServer
      * @param id Email address identifier.
      * @return Email address if one is matching the given identifier, null otherwise.
      */
-    public final EmailAddressServer getEmailById(final @NonNull UUID id)
+    public final ServerEmailAddress getEmailById(final @NonNull UUID id)
     {
         return emailAddresses.stream()
                 .filter(e -> e.getId().equals(id)).findFirst().orElse(null);
@@ -209,7 +209,7 @@ public class ServerPerson extends ServerEntity implements IServerPerson, IServer
      * @param type Address type.
      * @return List of email addresses.
      */
-    public final List<EmailAddressServer> findEmailAddressByType(final AddressType type)
+    public final List<ServerEmailAddress> findEmailAddressByType(final AddressType type)
     {
         return emailAddresses.stream()
                 .filter(emailAddress -> emailAddress.getAddressType() == type)
@@ -217,11 +217,11 @@ public class ServerPerson extends ServerEntity implements IServerPerson, IServer
     }
 
     /**
-     * Retrieves email addresses matching the given {@link StatusType}.
+     * Retrieves email addresses matching the given {@link EntityStatusType}.
      * @param status Status type.
      * @return List of email addresses.
      */
-    public final List<EmailAddressServer> findEmailAddressByStatus(final StatusType status)
+    public final List<ServerEmailAddress> findEmailAddressByStatus(final EntityStatusType status)
     {
         return emailAddresses.stream()
                 .filter(emailAddress -> emailAddress.getStatusType() == status)
@@ -233,7 +233,7 @@ public class ServerPerson extends ServerEntity implements IServerPerson, IServer
      * @param emailAddress Email address.
      * @throws EmailAddressException Raised if the email address already belongs to another person!
      */
-    public final void addEmailAddress(final @NonNull EmailAddressServer emailAddress) throws EmailAddressException
+    public final void addEmailAddress(final @NonNull ServerEmailAddress emailAddress) throws EmailAddressException
     {
         // An email address cannot be shared!
         if (emailAddress.getParent() != null)
@@ -301,11 +301,11 @@ public class ServerPerson extends ServerEntity implements IServerPerson, IServer
     }
 
     /**
-     * Retrieves postal addresses matching the given {@link StatusType}.
+     * Retrieves postal addresses matching the given {@link EntityStatusType}.
      * @param status Status type.
      * @return List of postal addresses.
      */
-    public final List<PostalAddressServer> findPostalAddressByStatus(final StatusType status)
+    public final List<PostalAddressServer> findPostalAddressByStatus(final EntityStatusType status)
     {
         return postalAddresses.stream()
                 .filter(e -> e.getStatusType() == status)
@@ -326,10 +326,10 @@ public class ServerPerson extends ServerEntity implements IServerPerson, IServer
      * Returns the default phone number.
      * @return Optional default phone number.
      */
-    public final Optional<PhoneNumberServer> getDefaultPhoneNumber()
+    public final Optional<ServerPhoneNumber> getDefaultPhoneNumber()
     {
         return phoneNumbers.stream()
-                .filter(PhoneNumberServer::getIsDefault).findFirst();
+                .filter(ServerPhoneNumber::getIsDefault).findFirst();
     }
 
     /**
@@ -338,7 +338,7 @@ public class ServerPerson extends ServerEntity implements IServerPerson, IServer
      */
     public final boolean hasDefaultPhoneNumber()
     {
-        return phoneNumbers.stream().anyMatch(PhoneNumberServer::getIsDefault);
+        return phoneNumbers.stream().anyMatch(ServerPhoneNumber::getIsDefault);
     }
 
     /**
@@ -357,7 +357,7 @@ public class ServerPerson extends ServerEntity implements IServerPerson, IServer
      * @param phoneNumber Phone number to check.
      * @return {@code True} if it already exist, {@code false} otherwise.
      */
-    public final boolean existPhoneNumber(final @NonNull PhoneNumberServer phoneNumber) // TODO Not sure it is necessary? Provide a test case.
+    public final boolean existPhoneNumber(final @NonNull ServerPhoneNumber phoneNumber) // TODO Not sure it is necessary? Provide a test case.
     {
         return phoneNumbers.stream()
                 .anyMatch(e -> e.equals(phoneNumber));
@@ -368,7 +368,7 @@ public class ServerPerson extends ServerEntity implements IServerPerson, IServer
      * @param type Address type.
      * @return List of phone numbers.
      */
-    public final List<PhoneNumberServer> findPhoneNumberByType(final PhoneNumberType type)
+    public final List<ServerPhoneNumber> findPhoneNumberByType(final PhoneNumberType type)
     {
         return phoneNumbers.stream()
                 .filter(e -> e.getPhoneType() == type)
@@ -376,11 +376,11 @@ public class ServerPerson extends ServerEntity implements IServerPerson, IServer
     }
 
     /**
-     * Retrieves phone numbers matching the given {@link StatusType}.
+     * Retrieves phone numbers matching the given {@link EntityStatusType}.
      * @param status Status type.
      * @return List of phone numbers.
      */
-    public final List<PhoneNumberServer> findPhoneNumberByStatus(final StatusType status)
+    public final List<ServerPhoneNumber> findPhoneNumberByStatus(final EntityStatusType status)
     {
         return phoneNumbers.stream()
                 .filter(e -> e.getStatusType() == status)
@@ -391,7 +391,7 @@ public class ServerPerson extends ServerEntity implements IServerPerson, IServer
      * Adds a phone number.
      * @param phoneNumber Phone number.
      */
-    public final void addPhoneNumber(final @NonNull PhoneNumberServer phoneNumber)
+    public final void addPhoneNumber(final @NonNull ServerPhoneNumber phoneNumber)
     {
         phoneNumber.setPerson(this);
         phoneNumbers.add(phoneNumber);
@@ -402,7 +402,7 @@ public class ServerPerson extends ServerEntity implements IServerPerson, IServer
      * @param email Email address to remove.
      * @throws EntityException Thrown to indicate an error occurred when trying to remove an email address.
      */
-    public final void removeEmailAddress(final @NonNull EmailAddressServer email) throws EntityException
+    public final void removeEmailAddress(final @NonNull ServerEmailAddress email) throws EntityException
     {
         email.setParent(null);
         emailAddresses.remove(email);

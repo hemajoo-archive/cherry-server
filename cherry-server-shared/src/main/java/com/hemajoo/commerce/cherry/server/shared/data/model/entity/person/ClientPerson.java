@@ -16,9 +16,12 @@ package com.hemajoo.commerce.cherry.server.shared.data.model.entity.person;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.ClientEntity;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.EntityStatusType;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.EntityType;
-import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.address.postal.PostalAddressClient;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.address.email.ClientEmailAddress;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.address.postal.ClientPostalAddress;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.address.type.AddressType;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.phone.ClientPhoneNumber;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.type.GenderType;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
@@ -87,7 +90,7 @@ public class ClientPerson extends ClientEntity implements IClientPerson
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @Schema(hidden = true)
-    private List<PostalAddressClient> postalAddresses = new ArrayList<>();
+    private List<ClientPostalAddress> postalAddresses = new ArrayList<>();
 
     /**
      * Set of phone numbers associated to the person.
@@ -95,7 +98,7 @@ public class ClientPerson extends ClientEntity implements IClientPerson
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @Schema(hidden = true)
-    private List<PhoneNumberClient> phoneNumbers = new ArrayList<>();
+    private List<ClientPhoneNumber> phoneNumbers = new ArrayList<>();
 
     /**
      * Set of email addresses associated to the person.
@@ -103,7 +106,7 @@ public class ClientPerson extends ClientEntity implements IClientPerson
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @Schema(hidden = true)
-    private List<EmailAddressClient> emailAddresses = new ArrayList<>();
+    private List<ClientEmailAddress> emailAddresses = new ArrayList<>();
 
     /**
      * Creates a new person.
@@ -138,17 +141,17 @@ public class ClientPerson extends ClientEntity implements IClientPerson
      * @return Default email address if one, null otherwise.
      */
     @JsonIgnore
-    public final EmailAddressClient getDefaultEmailAddress()
+    public final ClientEmailAddress getDefaultEmailAddress()
     {
-        Optional<EmailAddressClient> optional = emailAddresses.stream()
-                .filter(EmailAddressClient::getIsDefaultEmail).findFirst();
+        Optional<ClientEmailAddress> optional = emailAddresses.stream()
+                .filter(ClientEmailAddress::getIsDefaultEmail).findFirst();
 
         return optional.orElse(null);
     }
 
     public final boolean hasDefaultEmailAddress()
     {
-        return emailAddresses.stream().anyMatch(EmailAddressClient::getIsDefaultEmail);
+        return emailAddresses.stream().anyMatch(ClientEmailAddress::getIsDefaultEmail);
     }
 
     /**
@@ -156,10 +159,10 @@ public class ClientPerson extends ClientEntity implements IClientPerson
      * @return Default postal address if one, null otherwise.
      */
     @JsonIgnore
-    public final PostalAddressClient getDefaultPostalAddress()
+    public final ClientPostalAddress getDefaultPostalAddress()
     {
-        Optional<PostalAddressClient> optional =  postalAddresses.stream()
-                .filter(PostalAddressClient::getIsDefault).findFirst();
+        Optional<ClientPostalAddress> optional =  postalAddresses.stream()
+                .filter(ClientPostalAddress::getIsDefault).findFirst();
 
         return optional.orElse(null);
     }
@@ -180,7 +183,7 @@ public class ClientPerson extends ClientEntity implements IClientPerson
      * @param type Address type.
      * @return List of email addresses.
      */
-    public final List<EmailAddressClient> findEmailAddressByType(final AddressType type)
+    public final List<ClientEmailAddress> findEmailAddressByType(final AddressType type)
     {
         return emailAddresses.stream()
                 .filter(emailAddress -> emailAddress.getAddressType() == type)
@@ -188,11 +191,11 @@ public class ClientPerson extends ClientEntity implements IClientPerson
     }
 
     /**
-     * Retrieves email addresses matching the given {@link StatusType}.
+     * Retrieves email addresses matching the given {@link EntityStatusType}.
      * @param status Status type.
      * @return List of email addresses.
      */
-    public final List<EmailAddressClient> findEmailAddressByStatus(final StatusType status)
+    public final List<ClientEmailAddress> findEmailAddressByStatus(final EntityStatusType status)
     {
         return emailAddresses.stream()
                 .filter(emailAddress -> emailAddress.getStatusType() == status)
@@ -204,7 +207,7 @@ public class ClientPerson extends ClientEntity implements IClientPerson
      * @param type Address type.
      * @return List of postal addresses.
      */
-    public final List<PostalAddressClient> findPostalAddressByType(final AddressType type)
+    public final List<ClientPostalAddress> findPostalAddressByType(final AddressType type)
     {
         return postalAddresses.stream()
                 .filter(postalAddress -> postalAddress.getAddressType() == type)
@@ -212,11 +215,11 @@ public class ClientPerson extends ClientEntity implements IClientPerson
     }
 
     /**
-     * Retrieves postal addresses matching the given {@link StatusType}.
+     * Retrieves postal addresses matching the given {@link EntityStatusType}.
      * @param status Status type.
      * @return List of postal addresses.
      */
-    public final List<PostalAddressClient> findPostalAddressByStatus(final StatusType status)
+    public final List<ClientPostalAddress> findPostalAddressByStatus(final EntityStatusType status)
     {
         return postalAddresses.stream()
                 .filter(postalAddress -> postalAddress.getStatusType() == status)

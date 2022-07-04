@@ -14,10 +14,11 @@
  */
 package com.hemajoo.commerce.cherry.server.document.service;
 
+import com.hemajoo.commerce.cherry.server.commons.entity.query.condition.QueryConditionException;
 import com.hemajoo.commerce.cherry.server.data.model.document.ServerDocument;
+import com.hemajoo.commerce.cherry.server.document.query.DocumentQuery;
 import com.hemajoo.commerce.cherry.server.document.repository.IDocumentRepository;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.exception.EntityException;
-import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.query.condition.QueryConditionException;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.ClientDocument;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.exception.DocumentException;
 import lombok.NonNull;

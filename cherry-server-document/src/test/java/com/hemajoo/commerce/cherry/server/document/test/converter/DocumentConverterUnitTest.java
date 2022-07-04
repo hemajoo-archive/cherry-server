@@ -18,6 +18,7 @@ import com.hemajoo.commerce.cherry.server.commons.entity.comparator.EntityCompar
 import com.hemajoo.commerce.cherry.server.data.model.document.ServerDocument;
 import com.hemajoo.commerce.cherry.server.document.converter.DocumentConverter;
 import com.hemajoo.commerce.cherry.server.document.randomizer.DocumentRandomizer;
+import com.hemajoo.commerce.cherry.server.document.service.IDocumentService;
 import com.hemajoo.commerce.cherry.server.document.test.base.AbstractPostgresUnitTest;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.exception.EntityException;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.identity.EntityIdentity;
@@ -57,11 +58,11 @@ class DocumentConverterUnitTest extends AbstractPostgresUnitTest
     @Autowired
     private DocumentConverter converterDocument;
 
-//    /**
-//     * Person services.
-//     */
-//    @Autowired
-//    private ServiceFactoryPerson servicePerson;
+    /**
+     * Document services.
+     */
+    @Autowired
+    private IDocumentService documentService;
 
     /**
      * List element count.
@@ -93,7 +94,7 @@ class DocumentConverterUnitTest extends AbstractPostgresUnitTest
     final void testConvertIdentityToServerDocument() throws EntityException
     {
         // For an entity identity to be mapped to a server entity, the server entity must exist in the underlying database!
-        ServerDocument reference = servicePerson.getDocumentService().save(DocumentRandomizer.generateServerEntity(true));
+        ServerDocument reference = documentService.save(DocumentRandomizer.generateServerEntity(true));
 
         EntityIdentity identity = new EntityIdentity(reference.getIdentity());
         ServerDocument server = converterDocument.fromIdentityToServer(identity);
@@ -127,7 +128,7 @@ class DocumentConverterUnitTest extends AbstractPostgresUnitTest
     final void testConvertClientToServerDocumentWithOwner() throws EntityException
     {
         // For an entity identity to be mapped to a server entity, the server entity must exist in the underlying database!
-        ServerDocument server = servicePerson.getDocumentService().save(DocumentRandomizer.generateServerEntity(false));
+        ServerDocument server = documentService.save(DocumentRandomizer.generateServerEntity(false));
 
         ClientDocument client = DocumentRandomizer.generateClientEntity(true);
         client.setParent(server.getIdentity());

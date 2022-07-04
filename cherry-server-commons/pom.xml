@@ -158,6 +158,13 @@
             <artifactId>javers-core</artifactId>
         </dependency>
 
+        <!-- Cherry Server - Shared -->
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>cherry-server-shared</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
     </dependencies>
 
 </project>

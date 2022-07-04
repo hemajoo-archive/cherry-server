@@ -15,7 +15,7 @@
 package com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type;
 
 /**
- * Enumeration representing the several possible query <b>operator</b> types.
+ * Enumeration representing the several possible query operator types.
  * @author <a href="mailto:christophe.resse@gmail.com">Christophe Resse</a>
  * @version 1.0.0
  */
