@@ -35,17 +35,12 @@
     </scm>
 
     <modules>
-<!--        <module>cherry-server-commons</module>-->
-<!--        <module>cherry-server-document</module>-->
-<!--        <module>cherry-server-person</module>-->
-<!--        <module>cherry-server-organization</module>-->
-<!--        <module>cherry-server-employee</module>-->
-<!--        <module>cherry-server-catalog</module>-->
-<!--        <module>cherry-server-product</module>-->
-<!--        <module>cherry-server-service</module>-->
-<!--        <module>cherry-server-billing</module>-->
-        <module>cherry-server-coverage</module>
         <module>cherry-server-commons</module>
+        <module>cherry-server-data-model</module>
+        <module>cherry-server-shared</module>
+        <module>cherry-server-document</module>
+        <module>cherry-server-coverage</module>
+        <module>cherry-server-person</module>
     </modules>
 
     <properties>
@@ -81,7 +76,7 @@
         <version.plugin.maven.jacoco>0.8.7</version.plugin.maven.jacoco>
 
         <!-- Spring Boot properties -->
-        <version.spring.boot>2.6.4</version.spring.boot>
+        <version.spring.boot>2.7.0</version.spring.boot>
 
         <!-- Dependencies version properties -->
         <version.ressec.avocado>0.1.0</version.ressec.avocado>
@@ -90,15 +85,15 @@
         <version.junit.jupiter>5.8.2</version.junit.jupiter>
         <version.junit.platform.launcher>1.6.2</version.junit.platform.launcher>
         <version.javafaker>1.0.1</version.javafaker>
-        <version.apache.log4j>2.17.2</version.apache.log4j>
+        <version.apache.log4j>2.18.0</version.apache.log4j>
         <version.apache.commons.lang.3>3.9</version.apache.commons.lang.3>
         <version.apache.commons.io>2.11.0</version.apache.commons.io>
         <version.apache.commons.validator>1.7</version.apache.commons.validator>
-        <version.lombok>1.18.22</version.lombok>
-        <version.assertj>3.22.0</version.assertj>
-        <version.mapstruct>1.4.2.Final</version.mapstruct>
+        <version.lombok>1.18.24</version.lombok>
+        <version.assertj>3.23.1</version.assertj>
+        <version.mapstruct>1.5.2.Final</version.mapstruct>
         <version.lombok.mapstruct>0.2.0</version.lombok.mapstruct>
-        <version.flyway>8.5.2</version.flyway>
+        <version.flyway>8.5.13</version.flyway>
         <version.apache.tika>1.0.18</version.apache.tika>
         <version.hibernate.validator>7.0.1.Final</version.hibernate.validator>
         <version.javers>3.1.0</version.javers>
@@ -811,6 +806,7 @@
                 </plugins>
             </build>
         </profile>
+
 
         <profile>
             <id>java.8</id>

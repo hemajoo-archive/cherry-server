@@ -28,10 +28,25 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.springdoc</groupId>
+            <artifactId>springdoc-openapi-ui</artifactId>
+            <scope>compile</scope>
+        </dependency>
 
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.ressec.avocado</groupId>
+            <artifactId>avocado-core</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.lafa.tikaNoExternal</groupId>
+            <artifactId>tika-core</artifactId>
         </dependency>
 
     </dependencies>
