@@ -24,6 +24,7 @@ import com.hemajoo.commerce.cherry.server.document.test.base.AbstractPostgresUni
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.exception.EntityException;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.identity.EntityIdentity;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.identity.Identity;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.identity.IdentityAware;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.EntityType;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.IClientDocument;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.exception.DocumentException;
@@ -76,7 +77,8 @@ class DocumentConverterUnitTest extends AbstractPostgresUnitTest
     final void testConvertServerToIdentityDocument() throws DocumentException
     {
         IServerDocument document = DocumentRandomizer.generateServerEntity(true);
-        Identity identity = docConverter.fromServerToIdentity(document); //TODO We could simplify but directly extracting the identity from the server document instance such as: document.getIdentity();
+        Identity identity = document.getIdentity();
+
 
         assertThat(identity)
                 .as("Entity identity should not be null!")
@@ -133,7 +135,7 @@ class DocumentConverterUnitTest extends AbstractPostgresUnitTest
         IServerDocument server = docService.save(DocumentRandomizer.generateServerEntity(false));
 
         IClientDocument client = DocumentRandomizer.generateClientEntity(true);
-        client.setParent(server.getIdentity());
+        client.setParent((EntityIdentity) server.getIdentity());
 
         IServerDocument other = docConverter.fromClientToServer(client);
 
@@ -219,7 +221,7 @@ class DocumentConverterUnitTest extends AbstractPostgresUnitTest
         }
 
         List<Identity> identities = documents.stream()
-                .map(document -> docConverter.fromServerToIdentity(document)).toList();
+                .map(IdentityAware::getIdentity).toList();
 
         assertThat(identities.size())
                 .as("Both lists should have the same size!")

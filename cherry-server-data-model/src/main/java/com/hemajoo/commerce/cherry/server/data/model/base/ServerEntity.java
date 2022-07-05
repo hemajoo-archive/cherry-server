@@ -20,6 +20,7 @@ import com.hemajoo.commerce.cherry.server.data.model.document.IServerDocument;
 import com.hemajoo.commerce.cherry.server.data.model.document.ServerDocument;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.exception.EntityException;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.identity.EntityIdentity;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.identity.Identity;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.EntityType;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.exception.DocumentException;
 import lombok.*;
@@ -111,7 +112,6 @@ public class ServerEntity extends AbstractServerStatusEntity implements IServerE
     /**
      * The parent entity.
      */
-    @Getter
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @JsonIgnoreProperties
@@ -137,9 +137,15 @@ public class ServerEntity extends AbstractServerStatusEntity implements IServerE
     }
 
     @Override
-    public final EntityIdentity getIdentity()
+    public final Identity getIdentity()
     {
         return EntityIdentity.from(entityType, id);
+    }
+
+    @Override
+    public final ServerEntity getParent()
+    {
+        return parent;
     }
 
     @Override
@@ -167,7 +173,7 @@ public class ServerEntity extends AbstractServerStatusEntity implements IServerE
 
     @JsonIgnore
     @Override
-    public List<ServerDocument> getDocuments()
+    public List<IServerDocument> getDocuments()
     {
         if (entityType == EntityType.MEDIA)
         {
@@ -222,13 +228,13 @@ public class ServerEntity extends AbstractServerStatusEntity implements IServerE
     }
 
     @Override
-    public final void removeDocument(@NonNull IServerDocument document)
+    public final void removeDocument(final @NonNull IServerDocument document)
     {
         removeDocument(document.getId());
     }
 
     @Override
-    public final void removeDocument(@NonNull UUID documentId)
+    public final void removeDocument(final @NonNull UUID documentId)
     {
         documents.removeIf(doc -> doc.getId().equals(documentId));
     }

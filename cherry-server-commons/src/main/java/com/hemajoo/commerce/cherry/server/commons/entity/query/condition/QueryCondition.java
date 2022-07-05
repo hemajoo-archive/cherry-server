@@ -29,7 +29,7 @@ import java.util.List;
 @Log4j2
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder(setterPrefix = "with")
+@Builder(setterPrefix = "add")
 public final class QueryCondition
 {
     /**
@@ -40,19 +40,19 @@ public final class QueryCondition
     private String field;
 
     /**
+     * Operator type.
+     */
+    @Getter
+    @Setter
+    private QueryOperatorType operator;
+
+    /**
      * List of values.
      */
     @Getter
     @Setter
     @Singular // For chaining of arguments
     private List<Object> values;
-
-    /**
-     * Operator type.
-     */
-    @Getter
-    @Setter
-    private QueryOperatorType operator;
 
     /**
      * Sets the value for the given index.

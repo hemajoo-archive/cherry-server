@@ -19,7 +19,6 @@ import com.hemajoo.commerce.cherry.server.base.mapper.AbstractEntityMapper;
 import com.hemajoo.commerce.cherry.server.commons.entity.mapper.CycleAvoidingMappingContext;
 import com.hemajoo.commerce.cherry.server.data.model.document.IServerDocument;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.exception.EntityException;
-import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.identity.EntityIdentity;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.identity.Identity;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.IClientDocument;
 import lombok.Getter;
@@ -42,16 +41,6 @@ public class DocumentConverter implements IDocumentConverter
     @Getter
     @PersistenceContext
     private EntityManager entityManager;
-
-    /**
-     * Converts from a server document entity to an entity identity.
-     * @param server Server document entity.
-     * @return Entity identity.
-     */
-    public EntityIdentity fromServerToIdentity(final IServerDocument server)
-    {
-        return AbstractDocumentMapper.INSTANCE.fromServerToIdentity(server, new CycleAvoidingMappingContext());
-    }
 
     /**
      * Converts from an entity identity to a server document entity.

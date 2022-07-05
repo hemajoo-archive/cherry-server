@@ -84,7 +84,7 @@ public class BaseQueryEntity extends AbstractQueryStatus
     public static final String BASE_TAGS = "tags";
 
     /**
-     * Creates a new base entity query instance.
+     * Creates a new base entity query instance given an entity type.
      * @param entityType Entity type.
      */
     public BaseQueryEntity(final @NonNull EntityType entityType)

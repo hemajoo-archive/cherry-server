@@ -22,13 +22,6 @@ import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.ICli
 public interface IDocumentConverter
 {
     /**
-     * Converts from a server document entity to an entity identity.
-     * @param server Server document entity.
-     * @return Entity identity.
-     */
-    Identity fromServerToIdentity(IServerDocument server);
-
-    /**
      * Converts from an entity identity to a server document entity.
      * @param identity Entity identity.
      * @return Server document entity.

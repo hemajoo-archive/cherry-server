@@ -15,7 +15,6 @@
 package com.hemajoo.commerce.cherry.server.data.model.base;
 
 import com.hemajoo.commerce.cherry.server.data.model.document.IServerDocument;
-import com.hemajoo.commerce.cherry.server.data.model.document.ServerDocument;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.IEntity;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.exception.EntityException;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.exception.DocumentException;
@@ -33,13 +32,13 @@ import java.util.UUID;
 public interface IServerEntity extends IEntity
 {
     /**
-     * Returns the parent entity.
+     * Returns the parent entity of this entity (can be null).
      * @return Parent entity if set, <b>null</b>> otherwise.
      */
     ServerEntity getParent();
 
     /**
-     * Sets the parent entity.
+     * Sets the parent entity for this entity (can be null).
      * @param parent Parent entity.
      * @throws EntityException Thrown to indicate an error occurred when trying to set the parent entity.
      */
@@ -52,39 +51,39 @@ public interface IServerEntity extends IEntity
     int getDocumentCount();
 
     /**
-     * Return the list of documents this entity holds.
+     * Return the complete list of documents this entity holds.
      * @return List of documents.
      */
-    List<ServerDocument> getDocuments();
+    List<IServerDocument> getDocuments();
 
     /**
-     * Add a document.
+     * Add a document to this entity.
      * @param document Document to add.
      */
     void addDocument(final @NonNull IServerDocument document) throws DocumentException;
 
     /**
-     * Check if the given document exist in the list of this entity documents?
+     * Check if the given document exist in the list of documents for this entity?
      * @param document Document to check.
-     * @return {@code True} if the document exist, {@code false} otherwise.
+     * @return <b>True</b>> if the document exist, <b>false</b>> otherwise.
      */
     boolean existDocument(final @NonNull IServerDocument document);
 
     /**
-     * Check if the given document identifier exist in the list of this entity documents?
+     * Check if the given document identifier exist in the list of documents for this entity?
      * @param documentId Document identifier to check.
-     * @return {@code True} if the document identifier exist, {@code false} otherwise.
+     * @return <b>True</b>> if the document exist, <b>false</b> otherwise.
      */
     boolean existDocument(final UUID documentId);
 
     /**
-     * Remove a document from the list of this entity documents.
+     * Remove a document from the list of documents for this entity.
      * @param document Document to remove.
      */
     void removeDocument(final @NonNull IServerDocument document);
 
     /**
-     * Remove a document from the list of this entity documents.
+     * Remove a document from the list of documents for this entity.
      * @param documentId Document identifier to remove.
      */
     void removeDocument(final @NonNull UUID documentId);

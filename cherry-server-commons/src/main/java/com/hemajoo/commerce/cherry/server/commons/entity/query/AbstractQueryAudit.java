@@ -23,6 +23,7 @@ import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.Fie
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.QueryOperatorType;
 import lombok.Data;
 import lombok.NonNull;
+import lombok.Singular;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.Serializable;
@@ -74,6 +75,7 @@ public abstract class AbstractQueryAudit implements IQuery, Serializable
     /**
      * Query conditions.
      */
+    @Singular("addCondition")
     protected final List<QueryCondition> conditions = new ArrayList<>();
 
     /**

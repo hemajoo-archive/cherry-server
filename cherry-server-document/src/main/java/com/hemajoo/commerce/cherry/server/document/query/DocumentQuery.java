@@ -20,9 +20,10 @@ import com.hemajoo.commerce.cherry.server.commons.entity.query.condition.QueryFi
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.EntityType;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.FieldDataType;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.type.DocumentType;
+import lombok.Builder;
 
 /**
- * Represents a <b>query</b> object for issuing queries on documents.
+ * Represents a <b>query</b> object for issuing queries on document entities.
  * @author <a href="mailto:christophe.resse@gmail.com">Christophe Resse</a>
  * @version 1.0.0
  */
@@ -85,5 +86,15 @@ public class DocumentQuery extends BaseQueryEntity
                 .withFieldName(DOCUMENT_TAGS)
                 .withFieldType(FieldDataType.STRING)
                 .build());
+    }
+
+    /**
+     * Creates a new document query instance.
+     * @return Document query.
+     */
+    @Builder
+    public static DocumentQuery create()
+    {
+        return new DocumentQuery();
     }
 }
