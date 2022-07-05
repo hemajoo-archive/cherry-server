@@ -12,10 +12,10 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
 
-    <artifactId>cherry-server-person</artifactId>
+    <artifactId>cherry-server-rest</artifactId>
 
-    <name>Cherry Server - Person persistence services</name>
-    <description>Hemajoo's Commerce Cherry Server - Module providing persistent entities and services for the person area.</description>
+    <name>Cherry Server - REST API</name>
+    <description>Hemajoo's Commerce Cherry Server - Module providing REST APIs exposed by the persistence layer.</description>
 
     <properties>
         <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../cherry-server-coverage/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
@@ -25,13 +25,13 @@
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>cherry-server-data-model</artifactId>
+            <artifactId>cherry-server-document</artifactId>
             <version>${project.version}</version>
         </dependency>
 
         <dependency>
             <groupId>${project.groupId}</groupId>
-            <artifactId>cherry-server-commons</artifactId>
+            <artifactId>cherry-server-person</artifactId>
             <version>${project.version}</version>
         </dependency>
 

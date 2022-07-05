@@ -41,6 +41,7 @@
         <module>cherry-server-document</module>
         <module>cherry-server-coverage</module>
         <module>cherry-server-person</module>
+        <module>cherry-server-rest</module>
     </modules>
 
     <properties>
