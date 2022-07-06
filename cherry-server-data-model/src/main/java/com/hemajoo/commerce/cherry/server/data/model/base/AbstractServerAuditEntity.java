@@ -28,7 +28,7 @@ import javax.persistence.MappedSuperclass;
 import java.util.Date;
 
 /**
- * Represents an abstract server data model auditable entity.
+ * Represents an abstract server data model <b>auditable</b> entity.
  * @author <a href="mailto:christophe.resse@gmail.com">Christophe Resse</a>
  * @version 1.0.0
  */

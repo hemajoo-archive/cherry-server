@@ -35,7 +35,7 @@ import java.security.SecureRandom;
 import java.util.*;
 
 /**
- * Represents a server data model entity.
+ * Represents a server data model <b>entity</b>.
  * @author <a href="mailto:christophe.resse@gmail.com">Christophe Resse</a>
  * @version 1.0.0
  */

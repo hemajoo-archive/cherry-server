@@ -23,7 +23,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 /**
- * Represents an abstract server data model status aware entity.
+ * Represents an abstract server data model <b>status aware</b> entity.
  * @author <a href="mailto:christophe.resse@gmail.com">Christophe Resse</a>
  * @version 1.0.0
  */

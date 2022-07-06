@@ -12,10 +12,11 @@
  * Hemajoo Systems Inc.
  * -----------------------------------------------------------------------------------------------
  */
-package com.hemajoo.commerce.cherry.server.data.model.person;
+package com.hemajoo.commerce.cherry.server.data.model.person.phone;
 
 import com.hemajoo.commerce.cherry.server.data.model.base.IServerEntity;
 import com.hemajoo.commerce.cherry.server.data.model.base.ServerEntity;
+import com.hemajoo.commerce.cherry.server.data.model.person.ServerPerson;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.EntityType;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.phone.IPhoneNumber;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.phone.type.PhoneNumberCategoryType;
@@ -30,7 +31,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
- * Represents a server phone number entity.
+ * Represents a server data model <b>phone number</b> entity.
  * @author <a href="mailto:christophe.resse@gmail.com">Christophe Resse</a>
  * @version 1.0.0
  */

@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.UUID;
 
 /**
- * Entities implementing this interface are tagged as a server data model entity.
+ * Entities implementing this interface are tagged as a server data model <b>entity</b>.
  * @author <a href="mailto:christophe.resse@gmail.com">Christophe Resse</a>
  * @since Cherry 0.1.0
  * @version 1.0.0

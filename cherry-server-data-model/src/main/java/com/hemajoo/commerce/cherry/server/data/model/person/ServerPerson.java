@@ -17,6 +17,9 @@ package com.hemajoo.commerce.cherry.server.data.model.person;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.hemajoo.commerce.cherry.server.data.model.base.IServerEntity;
 import com.hemajoo.commerce.cherry.server.data.model.base.ServerEntity;
+import com.hemajoo.commerce.cherry.server.data.model.person.address.email.ServerEmailAddress;
+import com.hemajoo.commerce.cherry.server.data.model.person.address.postal.PostalAddressServer;
+import com.hemajoo.commerce.cherry.server.data.model.person.phone.ServerPhoneNumber;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.exception.EntityException;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.EntityStatusType;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.EntityType;
@@ -35,7 +38,7 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * Represents a person.
+ * Represents a server data model <b>person</b> entity.
  * @author <a href="mailto:christophe.resse@gmail.com">Christophe Resse</a>
  * @version 1.0.0
  */
