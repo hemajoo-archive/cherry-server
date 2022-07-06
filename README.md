@@ -1,10 +1,25 @@
 # Hemajoo Commerce - Cherry Server
 
-## Status
+## Project Status
+
+### CI/CD
+
+[![Cherry Server - CI](https://github.com/hemajoo-commerce/cherry-server/actions/workflows/build.yml/badge.svg)](https://github.com/hemajoo-commerce/cherry-server/actions/workflows/build.yml)
+
+### Quality
 
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=com.hemajoo.commerce%3Acherry-server&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=com.hemajoo.commerce%3Acherry-server) [![Reliability Rating](https://sonarcloud.io/api/project_badges/measure?project=com.hemajoo.commerce%3Acherry-server&metric=reliability_rating)](https://sonarcloud.io/summary/new_code?id=com.hemajoo.commerce%3Acherry-server) [![Security Rating](https://sonarcloud.io/api/project_badges/measure?project=com.hemajoo.commerce%3Acherry-server&metric=security_rating)](https://sonarcloud.io/summary/new_code?id=com.hemajoo.commerce%3Acherry-server) [![Maintainability Rating](https://sonarcloud.io/api/project_badges/measure?project=com.hemajoo.commerce%3Acherry-server&metric=sqale_rating)](https://sonarcloud.io/summary/new_code?id=com.hemajoo.commerce%3Acherry-server)<br>
+
+### Issues
+
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=com.hemajoo.commerce%3Acherry-server&metric=bugs)](https://sonarcloud.io/summary/new_code?id=com.hemajoo.commerce%3Acherry-server) [![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=com.hemajoo.commerce%3Acherry-server&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=com.hemajoo.commerce%3Acherry-server) [![Vulnerabilities](https://sonarcloud.io/api/project_badges/measure?project=com.hemajoo.commerce%3Acherry-server&metric=vulnerabilities)](https://sonarcloud.io/summary/new_code?id=com.hemajoo.commerce%3Acherry-server) [![Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=com.hemajoo.commerce%3Acherry-server&metric=sqale_index)](https://sonarcloud.io/summary/new_code?id=com.hemajoo.commerce%3Acherry-server)<br>
+
+### Metrics
+
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=com.hemajoo.commerce%3Acherry-server&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=com.hemajoo.commerce%3Acherry-server) [![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=com.hemajoo.commerce%3Acherry-server&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=com.hemajoo.commerce%3Acherry-server)<br>
+
+### Unit Tests
+
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=com.hemajoo.commerce%3Acherry-server&metric=coverage)](https://sonarcloud.io/summary/new_code?id=com.hemajoo.commerce%3Acherry-server)<br>
 
 ## Description
