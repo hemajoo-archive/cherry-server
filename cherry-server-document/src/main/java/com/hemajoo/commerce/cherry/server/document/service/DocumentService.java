@@ -258,13 +258,13 @@ public class DocumentService implements IDocumentService
                 case IDocument.DOCUMENT_TYPE ->
                         documentServer.setDocumentType((DocumentType) change.getRight());
 
-                case IDocument.BASE_DESCRIPTION ->
+                case IEntity.BASE_DESCRIPTION ->
                         documentServer.setDescription((String) change.getRight());
 
-                case IDocument.BASE_NAME ->
+                case IEntity.BASE_NAME ->
                         documentServer.setName((String) change.getRight());
 
-                case IDocument.BASE_REFERENCE ->
+                case IEntity.BASE_REFERENCE ->
                         documentServer.setReference((String) change.getRight());
 
                 case IStatusEntity.BASE_STATUS_TYPE ->
