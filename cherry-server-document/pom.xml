@@ -14,8 +14,8 @@
 
     <artifactId>cherry-server-document</artifactId>
 
-    <name>Cherry Server - Document</name>
-    <description>Hemajoo's Commerce - Cherry server module providing persistent entities and services for the document domain.</description>
+    <name>Cherry Server - Document persistence services</name>
+    <description>Hemajoo's Commerce Cherry Server - Module providing persistent entities and services for the document area.</description>
 
     <properties>
         <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../cherry-server-coverage/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
@@ -161,16 +161,6 @@
             <version>${project.version}</version>
         </dependency>
 
-<!--        &lt;!&ndash; Cherry Server - Commons &ndash;&gt;-->
-<!--        <dependency>-->
-<!--            <groupId>${project.groupId}</groupId>-->
-<!--            <artifactId>cherry-server-commons</artifactId>-->
-<!--            <version>${project.version}</version>-->
-<!--        </dependency>-->
-
-        <!-- Avocado: https://github.com/ressec/Avocado
-             General purpose library providing low level entities.
-          -->
         <dependency>
             <groupId>org.ressec.avocado</groupId>
             <artifactId>avocado-core</artifactId>

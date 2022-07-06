@@ -18,7 +18,7 @@ import com.hemajoo.commerce.cherry.server.data.model.base.IServerEntity;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.IDocument;
 
 /**
- * Entities implementing this interface are tagged as a server document data model entity.
+ * Entities implementing this interface are tagged as a server <b>document</b> data model entity.
  * @author <a href="mailto:christophe.resse@gmail.com">Christophe Resse</a>
  * @version 1.0.0
  */

@@ -14,8 +14,8 @@
  */
 package com.hemajoo.commerce.cherry.server.commons.entity.query;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hemajoo.commerce.cherry.server.commons.entity.query.condition.QueryField;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.IEntity;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.EntityType;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.FieldDataType;
 import lombok.NonNull;
@@ -30,61 +30,7 @@ import lombok.extern.log4j.Log4j2;
 public class BaseQueryEntity extends AbstractQueryStatus
 {
     /**
-     * Field: <b>id</b> of an entity.
-     */
-    @JsonIgnore
-    public static final String BASE_ENTITY_ID = "id";
-
-    /**
-     * Field: <b>entityType</b> of an entity.
-     */
-    @JsonIgnore
-    public static final String BASE_ENTITY_TYPE = "entityType";
-
-    /**
-     * Field: <b>name</b> of an entity.
-     */
-    @JsonIgnore
-    public static final String BASE_NAME = "name";
-
-    /**
-     * Field: <b>description</b> of an entity.
-     */
-    @JsonIgnore
-    public static final String BASE_DESCRIPTION = "description";
-
-    /**
-     * Field: <b>reference</b> of an entity.
-     */
-    @JsonIgnore
-    public static final String BASE_REFERENCE = "reference";
-
-    /**
-     * Field: <b>parentId</b> of an entity.
-     */
-    @JsonIgnore
-    public static final String BASE_PARENT_ID = "parentId";
-
-    /**
-     * Field: <b>parent</b> of an entity.
-     */
-    @JsonIgnore
-    public static final String BASE_PARENT = "parent";
-
-    /**
-     * Field: <b>parentType</b> of an entity.
-     */
-    @JsonIgnore
-    public static final String BASE_PARENT_TYPE = "parentType";
-
-    /**
-     * Field: <b>tags</b> of an entity.
-     */
-    @JsonIgnore
-    public static final String BASE_TAGS = "tags";
-
-    /**
-     * Creates a new base entity query instance.
+     * Creates a new base entity query instance given an entity type.
      * @param entityType Entity type.
      */
     public BaseQueryEntity(final @NonNull EntityType entityType)
@@ -92,35 +38,35 @@ public class BaseQueryEntity extends AbstractQueryStatus
         super(entityType);
 
         fields.add(QueryField.builder()
-                .withFieldName(BASE_ENTITY_ID)
+                .withFieldName(IEntity.BASE_ENTITY_ID)
                 .withFieldType(FieldDataType.UUID)
                 .build());
         fields.add(QueryField.builder()
-                .withFieldName(BASE_NAME)
+                .withFieldName(IEntity.BASE_NAME)
                 .withFieldType(FieldDataType.STRING)
                 .build());
         fields.add(QueryField.builder()
-                .withFieldName(BASE_DESCRIPTION)
+                .withFieldName(IEntity.BASE_DESCRIPTION)
                 .withFieldType(FieldDataType.STRING)
                 .build());
         fields.add(QueryField.builder()
-                .withFieldName(BASE_REFERENCE)
+                .withFieldName(IEntity.BASE_REFERENCE)
                 .withFieldType(FieldDataType.STRING)
                 .build());
         fields.add(QueryField.builder()
-                .withFieldName(BASE_TAGS)
+                .withFieldName(IEntity.BASE_TAGS)
                 .withFieldType(FieldDataType.STRING)
                 .build());
         fields.add(QueryField.builder()
-                .withFieldName(BASE_ENTITY_TYPE)
+                .withFieldName(IEntity.BASE_ENTITY_TYPE)
                 .withFieldType(FieldDataType.ENUM)
                 .build());
         fields.add(QueryField.builder()
-                .withFieldName(BASE_PARENT_ID)
+                .withFieldName(IEntity.BASE_PARENT_ID)
                 .withFieldType(FieldDataType.UUID)
                 .build());
         fields.add(QueryField.builder()
-                .withFieldName(BASE_PARENT_TYPE)
+                .withFieldName(IEntity.BASE_PARENT_TYPE)
                 .withFieldType(FieldDataType.ENUM)
                 .withClassType(EntityType.class)
                 .build());
@@ -132,35 +78,35 @@ public class BaseQueryEntity extends AbstractQueryStatus
     public BaseQueryEntity()
     {
         fields.add(QueryField.builder()
-                .withFieldName(BASE_ENTITY_ID)
+                .withFieldName(IEntity.BASE_ENTITY_ID)
                 .withFieldType(FieldDataType.UUID)
                 .build());
         fields.add(QueryField.builder()
-                .withFieldName(BASE_NAME)
+                .withFieldName(IEntity.BASE_NAME)
                 .withFieldType(FieldDataType.STRING)
                 .build());
         fields.add(QueryField.builder()
-                .withFieldName(BASE_DESCRIPTION)
+                .withFieldName(IEntity.BASE_DESCRIPTION)
                 .withFieldType(FieldDataType.STRING)
                 .build());
         fields.add(QueryField.builder()
-                .withFieldName(BASE_REFERENCE)
+                .withFieldName(IEntity.BASE_REFERENCE)
                 .withFieldType(FieldDataType.STRING)
                 .build());
         fields.add(QueryField.builder()
-                .withFieldName(BASE_TAGS)
+                .withFieldName(IEntity.BASE_TAGS)
                 .withFieldType(FieldDataType.STRING)
                 .build());
         fields.add(QueryField.builder()
-                .withFieldName(BASE_ENTITY_TYPE)
+                .withFieldName(IEntity.BASE_ENTITY_TYPE)
                 .withFieldType(FieldDataType.ENUM)
                 .build());
         fields.add(QueryField.builder()
-                .withFieldName(BASE_PARENT)
+                .withFieldName(IEntity.BASE_PARENT)
                 .withFieldType(FieldDataType.UUID)
                 .build());
         fields.add(QueryField.builder()
-                .withFieldName(BASE_PARENT_TYPE)
+                .withFieldName(IEntity.BASE_PARENT_TYPE)
                 .withFieldType(FieldDataType.ENUM)
                 .build());
     }

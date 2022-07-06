@@ -14,7 +14,6 @@
  */
 package com.hemajoo.commerce.cherry.server.document.test.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.hemajoo.commerce.cherry.server.commons.entity.query.condition.QueryCondition;
 import com.hemajoo.commerce.cherry.server.commons.entity.query.condition.QueryConditionException;
 import com.hemajoo.commerce.cherry.server.data.model.document.ServerDocument;
@@ -24,6 +23,7 @@ import com.hemajoo.commerce.cherry.server.document.service.IDocumentService;
 import com.hemajoo.commerce.cherry.server.document.test.base.AbstractPostgresUnitTest;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.EntityStatusType;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.QueryOperatorType;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.IDocument;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.exception.DocumentException;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.type.DocumentType;
 import lombok.extern.log4j.Log4j2;
@@ -195,16 +195,18 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
                 .isNull();
     }
 
-    //@Test
+    @Disabled
+    @Test
     @DisplayName("Create an invalid search criteria")
     void testCreateInvalidSearchCriteria() //TODO Review this unit test to create an invalid search criteria!
     {
         try
         {
-            new DocumentQuery().addCondition(QueryCondition.builder()
-                    .withField(DocumentQuery.DOCUMENT_CONTENT_PATH)
-                    .withValue("john.doe@gmail.com")
-                    .withOperator(QueryOperatorType.EQUAL)
+            DocumentQuery.create()
+                    .addCondition(QueryCondition.builder()
+                    .addField(IDocument.DOCUMENT_CONTENT_PATH)
+                    .addValue("john.doe@gmail.com")
+                    .addOperator(QueryOperatorType.EQUAL)
                     .build());
             Assertions.fail(String.format("Should have raised an: '%s'", QueryConditionException.class));
         }
@@ -216,24 +218,24 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
 
     @Test
     @DisplayName("Query documents by their extension equal to")
-    void testQueryDocumentByExtensionEqualTo() throws QueryConditionException, JsonProcessingException
+    void testQueryDocumentByExtensionEqualTo() throws QueryConditionException
     {
         final String DOCUMENT_EXTENSION = "jpg";
 
-        DocumentQuery search = new DocumentQuery()
+        DocumentQuery query = DocumentQuery.create()
                 .addCondition(QueryCondition.builder()
-                        .withField(DocumentQuery.DOCUMENT_EXTENSION)
-                        .withValue(DOCUMENT_EXTENSION)
-                        .withOperator(QueryOperatorType.EQUAL)
+                        .addField(IDocument.DOCUMENT_EXTENSION)
+                        .addOperator(QueryOperatorType.EQUAL)
+                        .addValue(DOCUMENT_EXTENSION)
                         .build())
                 .addCondition(QueryCondition.builder()
-                        .withField(DocumentQuery.DOCUMENT_CONTENT_LENGTH)
-                        .withValue(0L)
-                        .withValue(50000L)
-                        .withOperator(QueryOperatorType.BETWEEN)
+                        .addField(IDocument.DOCUMENT_CONTENT_LENGTH)
+                        .addOperator(QueryOperatorType.BETWEEN)
+                        .addValue(0L)
+                        .addValue(50000L)
                         .build());
 
-        List<ServerDocument> documents = documentService.search(search);
+        List<ServerDocument> documents = documentService.search(query);
         assertThat(documents)
                 .as("Document list should not be empty!")
                 .isNotEmpty();
@@ -253,19 +255,25 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
     }
 
     @Test
-    @DisplayName("Query documents by mime type equal to")
+    @DisplayName("Query documents by mime type equal to: 'text/plain' and document type equal to: 'DOCUMENT_GENERIC'")
     void testQueryDocumentByMimeTypeEqualTo() throws QueryConditionException
     {
         final String DOCUMENT_MIMETYPE = "text/plain";
+        final DocumentType DOCUMENT_TYPE = DocumentType.DOCUMENT_GENERIC;
 
-        DocumentQuery search = new DocumentQuery()
+        DocumentQuery query = DocumentQuery.create()
                 .addCondition(QueryCondition.builder()
-                        .withField(DocumentQuery.DOCUMENT_MIMETYPE)
-                        .withValue(DOCUMENT_MIMETYPE)
-                        .withOperator(QueryOperatorType.EQUAL)
+                        .addField(IDocument.DOCUMENT_MIMETYPE)
+                        .addOperator(QueryOperatorType.EQUAL)
+                        .addValue(DOCUMENT_MIMETYPE)
+                        .build())
+                .addCondition(QueryCondition.builder()
+                        .addField(IDocument.DOCUMENT_TYPE)
+                        .addOperator(QueryOperatorType.EQUAL)
+                        .addValue(DOCUMENT_TYPE)
                         .build());
 
-        List<ServerDocument> documents = documentService.search(search);
+        List<ServerDocument> documents = documentService.search(query);
         assertThat(documents)
                 .as("Document list should not be empty!")
                 .isNotEmpty();
@@ -291,15 +299,15 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
         final ZonedDateTime DOCUMENT_DATE_LOW = ZonedDateTime.parse("2000-08-21 00:00:00.001 Europe/Paris", formatter);
         final Instant DOCUMENT_DATE_HIGH = Instant.now();
 
-        DocumentQuery search = new DocumentQuery()
+        DocumentQuery query = DocumentQuery.create()
                 .addCondition(QueryCondition.builder()
-                        .withField(DocumentQuery.BASE_SINCE)
-                        .withValue(Date.from(DOCUMENT_DATE_LOW.toInstant()))
-                        .withValue(Date.from(DOCUMENT_DATE_HIGH))
-                        .withOperator(QueryOperatorType.BETWEEN)
+                        .addField(IDocument.BASE_SINCE)
+                        .addOperator(QueryOperatorType.BETWEEN)
+                        .addValue(Date.from(DOCUMENT_DATE_LOW.toInstant()))
+                        .addValue(Date.from(DOCUMENT_DATE_HIGH))
                         .build());
 
-        List<ServerDocument> documents = documentService.search(search);
+        List<ServerDocument> documents = documentService.search(query);
         assertThat(documents)
                 .as("Document list should not be empty!")
                 .isNotEmpty();
@@ -321,14 +329,14 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
     {
         final String FILENAME_PATTERN = "license";
 
-        DocumentQuery search = new DocumentQuery()
+        DocumentQuery query = DocumentQuery.create()
                 .addCondition(QueryCondition.builder()
-                        .withField(DocumentQuery.DOCUMENT_FILENAME)
-                        .withValue(FILENAME_PATTERN)
-                        .withOperator(QueryOperatorType.CONTAINS)
+                        .addField(IDocument.DOCUMENT_FILENAME)
+                        .addOperator(QueryOperatorType.CONTAINS)
+                        .addValue(FILENAME_PATTERN)
                         .build());
 
-        List<ServerDocument> documents = documentService.search(search);
+        List<ServerDocument> documents = documentService.search(query);
         assertThat(documents)
                 .as("Document list should not be empty!")
                 .isNotEmpty();
@@ -348,15 +356,15 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
         final Long CONTENT_LENGTH_LOW = 34000L;
         final Long CONTENT_LENGTH_HIGH = 35000L;
 
-        DocumentQuery search = new DocumentQuery()
+        DocumentQuery query = DocumentQuery.create()
                 .addCondition(QueryCondition.builder()
-                        .withField(DocumentQuery.DOCUMENT_CONTENT_LENGTH)
-                        .withValue(CONTENT_LENGTH_LOW)
-                        .withValue(CONTENT_LENGTH_HIGH)
-                        .withOperator(QueryOperatorType.BETWEEN)
+                        .addField(IDocument.DOCUMENT_CONTENT_LENGTH)
+                        .addOperator(QueryOperatorType.BETWEEN)
+                        .addValue(CONTENT_LENGTH_LOW)
+                        .addValue(CONTENT_LENGTH_HIGH)
                         .build());
 
-        List<ServerDocument> documents = documentService.search(search);
+        List<ServerDocument> documents = documentService.search(query);
         assertThat(documents)
                 .as("Document list should not be empty!")
                 .isNotEmpty();
@@ -370,19 +378,19 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
     }
 
     @Test
-    @DisplayName("Query documents by content length greater than or equal")
+    @DisplayName("Query documents by content length greater than or equal to")
     void testQueryDocumentByContentLengthGreaterThanOrEqual() throws QueryConditionException
     {
         final Long CONTENT_LENGTH_LOW = 35000L;
 
-        DocumentQuery search = new DocumentQuery()
+        DocumentQuery query = DocumentQuery.create()
                 .addCondition(QueryCondition.builder()
-                        .withField(DocumentQuery.DOCUMENT_CONTENT_LENGTH)
-                        .withValue(CONTENT_LENGTH_LOW)
-                        .withOperator(QueryOperatorType.GREATER_THAN_EQUAL)
+                        .addField(IDocument.DOCUMENT_CONTENT_LENGTH)
+                        .addOperator(QueryOperatorType.GREATER_THAN_EQUAL)
+                        .addValue(CONTENT_LENGTH_LOW)
                         .build());
 
-        List<ServerDocument> documents = documentService.search(search);
+        List<ServerDocument> documents = documentService.search(query);
         assertThat(documents)
                 .as("Document list should not be empty!")
                 .isNotEmpty();
@@ -401,14 +409,14 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
     {
         final DocumentType DOCUMENT_TYPE = DocumentType.DOCUMENT_INVOICE;
 
-        DocumentQuery search = new DocumentQuery()
+        DocumentQuery query = DocumentQuery.create()
                 .addCondition(QueryCondition.builder()
-                        .withField(DocumentQuery.DOCUMENT_TYPE)
-                        .withValue(DOCUMENT_TYPE)
-                        .withOperator(QueryOperatorType.EQUAL)
+                        .addField(IDocument.DOCUMENT_TYPE)
+                        .addOperator(QueryOperatorType.EQUAL)
+                        .addValue(DOCUMENT_TYPE)
                         .build());
 
-        List<ServerDocument> documents = documentService.search(search);
+        List<ServerDocument> documents = documentService.search(query);
         assertThat(documents)
                 .as("Document list should not be empty!")
                 .isNotEmpty();
@@ -423,18 +431,18 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
 
     @Test
     @DisplayName("Query documents by their status type equal to")
-    void testQueryDocumentByStatusTypeEqualTo() throws QueryConditionException, JsonProcessingException
+    void testQueryDocumentByStatusTypeEqualTo() throws QueryConditionException
     {
         final EntityStatusType DOCUMENT_STATUS = EntityStatusType.INACTIVE;
 
-        DocumentQuery search = new DocumentQuery()
+        DocumentQuery query = DocumentQuery.create()
                 .addCondition(QueryCondition.builder()
-                        .withField(DocumentQuery.BASE_STATUS_TYPE)
-                        .withValue(DOCUMENT_STATUS)
-                        .withOperator(QueryOperatorType.EQUAL)
+                        .addField(IDocument.BASE_STATUS_TYPE)
+                        .addOperator(QueryOperatorType.EQUAL)
+                        .addValue(DOCUMENT_STATUS)
                         .build());
 
-        List<ServerDocument> documents = documentService.search(search);
+        List<ServerDocument> documents = documentService.search(query);
         assertThat(documents)
                 .as("Document list should not be empty!")
                 .isNotEmpty();

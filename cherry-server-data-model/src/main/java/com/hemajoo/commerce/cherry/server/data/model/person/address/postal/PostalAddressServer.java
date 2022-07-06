@@ -12,10 +12,11 @@
  * Hemajoo Systems Inc.
  * -----------------------------------------------------------------------------------------------
  */
-package com.hemajoo.commerce.cherry.server.data.model.person;
+package com.hemajoo.commerce.cherry.server.data.model.person.address.postal;
 
 import com.hemajoo.commerce.cherry.server.data.model.base.IServerEntity;
 import com.hemajoo.commerce.cherry.server.data.model.base.ServerEntity;
+import com.hemajoo.commerce.cherry.server.data.model.person.ServerPerson;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.EntityType;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.address.postal.IPostalAddress;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.address.postal.type.PostalAddressCategoryType;
@@ -30,7 +31,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
- * Represents a server postal address entity.
+ * Represents a server data model <b>postal address</b> entity.
  * @author <a href="mailto:christophe.resse@gmail.com">Christophe Resse</a>
  * @version 1.0.0
  */

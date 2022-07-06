@@ -14,6 +14,7 @@
  */
 package com.hemajoo.commerce.cherry.server.shared.data.model.entity.document;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.IEntity;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.type.DocumentType;
 
@@ -24,6 +25,48 @@ import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.type
  */
 public interface IDocument extends IEntity
 {
+    /**
+     * Document <b>extension</b> field.
+     */
+    @JsonIgnore
+    public static final String DOCUMENT_EXTENSION = "extension";
+
+    /**
+     * Document <b>filename</b> field.
+     */
+    @JsonIgnore
+    public static final String DOCUMENT_FILENAME = "filename";
+
+    /**
+     * Document <b>content path</b> field.
+     */
+    @JsonIgnore
+    public static final String DOCUMENT_CONTENT_PATH = "contentPath";
+
+    /**
+     * Document <b>content length</b> field.
+     */
+    @JsonIgnore
+    public static final String DOCUMENT_CONTENT_LENGTH = "contentLength";
+
+    /**
+     * Document <b>type</b> field.
+     */
+    @JsonIgnore
+    public static final String DOCUMENT_TYPE = "documentType";
+
+    /**
+     * Document <b>mime type</b> field.
+     */
+    @JsonIgnore
+    public static final String DOCUMENT_MIMETYPE = "mimeType";
+
+    /**
+     * Document <b>tags</b> field.
+     */
+    @JsonIgnore
+    public static final String DOCUMENT_TAGS = "tags";
+
     /**
      * Returns the document type.
      * @return Document type.

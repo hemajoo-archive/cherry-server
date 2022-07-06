@@ -14,12 +14,11 @@
  */
 package com.hemajoo.commerce.cherry.server.commons.entity.query;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hemajoo.commerce.cherry.server.commons.entity.query.condition.QueryField;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.IStatusEntity;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.EntityStatusType;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.EntityType;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.FieldDataType;
-import lombok.Data;
 import lombok.NonNull;
 
 /**
@@ -27,36 +26,23 @@ import lombok.NonNull;
  * @author <a href="mailto:christophe.resse@gmail.com">Christophe Resse</a>
  * @version 1.0.0
  */
-@Data
 public abstract class AbstractQueryStatus extends AbstractQueryAudit
 {
-    /**
-     * Field: <b>statusType</b> of an entity.
-     */
-    @JsonIgnore
-    public static final String BASE_STATUS_TYPE = "statusType";
-
-    /**
-     * Field: <b>since</b> (inactive date) of an entity.
-     */
-    @JsonIgnore
-    public static final String BASE_SINCE = "since";
-
     /**
      * Creates a new abstract status search.
      * @param entityType Entity type.
      */
-    public AbstractQueryStatus(final @NonNull EntityType entityType)
+    protected AbstractQueryStatus(final @NonNull EntityType entityType)
     {
         super(entityType);
 
         fields.add(QueryField.builder()
-                .withFieldName(BASE_STATUS_TYPE)
+                .withFieldName(IStatusEntity.BASE_STATUS_TYPE)
                 .withFieldType(FieldDataType.ENUM)
                 .withClassType(EntityStatusType.class)
                 .build());
         fields.add(QueryField.builder()
-                .withFieldName(BASE_SINCE)
+                .withFieldName(IStatusEntity.BASE_SINCE)
                 .withFieldType(FieldDataType.DATE)
                 .build());
     }
@@ -64,15 +50,15 @@ public abstract class AbstractQueryStatus extends AbstractQueryAudit
     /**
      * Creates a new abstract status search.
      */
-    public AbstractQueryStatus()
+    protected AbstractQueryStatus()
     {
         fields.add(QueryField.builder()
-                .withFieldName(BASE_STATUS_TYPE)
+                .withFieldName(IStatusEntity.BASE_STATUS_TYPE)
                 .withFieldType(FieldDataType.ENUM)
                 .withClassType(EntityStatusType.class)
                 .build());
         fields.add(QueryField.builder()
-                .withFieldName(BASE_SINCE)
+                .withFieldName(IStatusEntity.BASE_SINCE)
                 .withFieldType(FieldDataType.DATE)
                 .build());
     }

@@ -54,6 +54,13 @@ public class QueryField
     @Setter
     private EntityType entityType;
 
+    /**
+     * Creates a new query field.
+     * @param fieldName Field name.
+     * @param fieldType Field type.
+     * @param classType Class type (of the field's value).
+     * @param entityType Entity type.
+     */
     @Builder(setterPrefix = "with")
     public QueryField(final @NonNull String fieldName, final @NonNull FieldDataType fieldType, final Class<?> classType, final EntityType entityType)
     {

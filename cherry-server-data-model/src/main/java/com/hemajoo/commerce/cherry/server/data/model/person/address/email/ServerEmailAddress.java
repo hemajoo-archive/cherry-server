@@ -12,7 +12,7 @@
  * Hemajoo Systems Inc.
  * -----------------------------------------------------------------------------------------------
  */
-package com.hemajoo.commerce.cherry.server.data.model.person;
+package com.hemajoo.commerce.cherry.server.data.model.person.address.email;
 
 import com.hemajoo.commerce.cherry.server.data.model.base.IServerEntity;
 import com.hemajoo.commerce.cherry.server.data.model.base.ServerEntity;
@@ -31,7 +31,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 /**
- * Represents a server side email address entity.
+ * Represents a server data model <b>email address</b> entity.
  * @author <a href="mailto:christophe.resse@gmail.com">Christophe Resse</a>
  * @version 1.0.0
  */

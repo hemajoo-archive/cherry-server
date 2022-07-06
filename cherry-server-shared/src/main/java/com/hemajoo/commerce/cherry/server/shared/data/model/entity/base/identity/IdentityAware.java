@@ -30,5 +30,5 @@ public interface IdentityAware extends Serializable
      * @return Entity identity.
      */
     @JsonIgnore
-    EntityIdentity getIdentity();
+    Identity getIdentity();
 }

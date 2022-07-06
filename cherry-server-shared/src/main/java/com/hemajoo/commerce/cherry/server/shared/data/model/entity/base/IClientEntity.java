@@ -33,5 +33,5 @@ public interface IClientEntity extends IEntity
      * Sets the parent entity identity.
      * @param parent Parent entity identity.
      */
-    void setParent(final EntityIdentity parent) throws RuntimeException;
+    void setParent(final EntityIdentity parent);
 }

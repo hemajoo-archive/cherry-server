@@ -149,6 +149,10 @@ public class ClientPerson extends ClientEntity implements IClientPerson
         return optional.orElse(null);
     }
 
+    /**
+     * Returns if the person has a default email address?
+     * @return <b>True</b> if the person has a default email address, <b>false</b> otherwise.
+     */
     public final boolean hasDefaultEmailAddress()
     {
         return emailAddresses.stream().anyMatch(ClientEmailAddress::getIsDefaultEmail);

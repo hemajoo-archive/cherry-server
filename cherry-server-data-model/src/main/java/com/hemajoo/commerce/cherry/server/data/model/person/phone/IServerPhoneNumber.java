@@ -12,13 +12,13 @@
  * Hemajoo Systems Inc.
  * -----------------------------------------------------------------------------------------------
  */
-package com.hemajoo.commerce.cherry.server.data.model.person;
+package com.hemajoo.commerce.cherry.server.data.model.person.phone;
 
 import com.hemajoo.commerce.cherry.server.data.model.base.IServerEntity;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.phone.IPhoneNumber;
 
 /**
- * Behavior of a server phone number entity.
+ * Entities implementing this interface are tagged as a server <b>phone number</b> data model entity.
  * @author <a href="mailto:christophe.resse@gmail.com">Christophe Resse</a>
  * @version 1.0.0
  */

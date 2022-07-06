@@ -18,11 +18,14 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hemajoo.commerce.cherry.server.commons.entity.query.condition.QueryCondition;
 import com.hemajoo.commerce.cherry.server.commons.entity.query.condition.QueryConditionException;
 import com.hemajoo.commerce.cherry.server.commons.entity.query.condition.QueryField;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.IAuditEntity;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.exception.NotYetImplementedException;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.EntityType;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.FieldDataType;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.QueryOperatorType;
 import lombok.Data;
 import lombok.NonNull;
+import lombok.Singular;
 import lombok.extern.log4j.Log4j2;
 
 import java.io.Serializable;
@@ -40,29 +43,8 @@ import java.util.List;
 public abstract class AbstractQueryAudit implements IQuery, Serializable
 {
     /**
-     * Field: <b>createdDate</b> of an entity.
+     * Entity type.
      */
-    @JsonIgnore
-    public static final String BASE_CREATED_DATE = "createdDate";
-
-    /**
-     * Field: <b>modifiedDate</b> of an entity.
-     */
-    @JsonIgnore
-    public static final String BASE_MODIFIED_DATE = "modifiedDate";
-
-    /**
-     * Field: <b>createdBy</b> of an entity.
-     */
-    @JsonIgnore
-    public static final String BASE_CREATED_BY = "createdBy";
-
-    /**
-     * Field: <b>modifiedBy</b> of an entity.
-     */
-    @JsonIgnore
-    public static final String BASE_MODIFIED_BY = "modifiedBy";
-
     private EntityType entityType = null;
 
     /**
@@ -74,6 +56,7 @@ public abstract class AbstractQueryAudit implements IQuery, Serializable
     /**
      * Query conditions.
      */
+    @Singular("addCondition")
     protected final List<QueryCondition> conditions = new ArrayList<>();
 
     /**
@@ -162,6 +145,7 @@ public abstract class AbstractQueryAudit implements IQuery, Serializable
     public void validate()
     {
         // TODO Implement checks of the conditions...
+        throw new NotYetImplementedException();
     }
 
     /**
@@ -175,19 +159,19 @@ public abstract class AbstractQueryAudit implements IQuery, Serializable
         this.entityType = entityType;
 
         fields.add(QueryField.builder()
-                .withFieldName(BASE_CREATED_DATE)
+                .withFieldName(IAuditEntity.BASE_CREATED_DATE)
                 .withFieldType(FieldDataType.DATE)
                 .build());
         fields.add(QueryField.builder()
-                .withFieldName(BASE_MODIFIED_DATE)
+                .withFieldName(IAuditEntity.BASE_MODIFIED_DATE)
                 .withFieldType(FieldDataType.DATE)
                 .build());
         fields.add(QueryField.builder()
-                .withFieldName(BASE_CREATED_BY)
+                .withFieldName(IAuditEntity.BASE_CREATED_BY)
                 .withFieldType(FieldDataType.STRING)
                 .build());
         fields.add(QueryField.builder()
-                .withFieldName(BASE_MODIFIED_BY)
+                .withFieldName(IAuditEntity.BASE_MODIFIED_BY)
                 .withFieldType(FieldDataType.STRING)
                 .build());
     }
@@ -198,19 +182,19 @@ public abstract class AbstractQueryAudit implements IQuery, Serializable
     public AbstractQueryAudit()
     {
         fields.add(QueryField.builder()
-                .withFieldName(BASE_CREATED_DATE)
+                .withFieldName(IAuditEntity.BASE_CREATED_DATE)
                 .withFieldType(FieldDataType.DATE)
                 .build());
         fields.add(QueryField.builder()
-                .withFieldName(BASE_MODIFIED_DATE)
+                .withFieldName(IAuditEntity.BASE_MODIFIED_DATE)
                 .withFieldType(FieldDataType.DATE)
                 .build());
         fields.add(QueryField.builder()
-                .withFieldName(BASE_CREATED_BY)
+                .withFieldName(IAuditEntity.BASE_CREATED_BY)
                 .withFieldType(FieldDataType.STRING)
                 .build());
         fields.add(QueryField.builder()
-                .withFieldName(BASE_MODIFIED_BY)
+                .withFieldName(IAuditEntity.BASE_MODIFIED_BY)
                 .withFieldType(FieldDataType.STRING)
                 .build());
     }

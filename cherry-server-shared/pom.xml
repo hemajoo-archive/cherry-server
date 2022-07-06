@@ -15,7 +15,7 @@
     <artifactId>cherry-server-shared</artifactId>
 
     <name>Cherry Server - Shared</name>
-    <description>Hemajoo's Commerce - Module providing shared entities.</description>
+    <description>Hemajoo's Commerce Cherry Server - Module providing shared entities between the server and client sides (also called the client data model).</description>
 
     <properties>
         <sonar.coverage.jacoco.xmlReportPaths>${project.basedir}/../cherry-server-coverage/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>

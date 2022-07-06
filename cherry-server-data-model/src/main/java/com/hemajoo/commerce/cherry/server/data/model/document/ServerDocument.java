@@ -37,7 +37,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 /**
- * Represents a server data model document entity.
+ * Represents a server data model <b>document</b> entity.
  * @author <a href="mailto:christophe.resse@gmail.com">Christophe Resse</a>
  * @version 1.0.0
  */

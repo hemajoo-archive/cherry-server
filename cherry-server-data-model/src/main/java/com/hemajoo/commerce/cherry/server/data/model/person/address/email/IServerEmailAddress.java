@@ -12,13 +12,13 @@
  * Hemajoo Systems Inc.
  * -----------------------------------------------------------------------------------------------
  */
-package com.hemajoo.commerce.cherry.server.data.model.person;
+package com.hemajoo.commerce.cherry.server.data.model.person.address.email;
 
 import com.hemajoo.commerce.cherry.server.data.model.base.IServerEntity;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.person.address.email.IEmailAddress;
 
 /**
- * Interface providing the behavior of a server email address entity.
+ * Entities implementing this interface are tagged as a server <b>email address</b> data model entity.
  * @author <a href="mailto:christophe.resse@gmail.com">Christophe Resse</a>
  * @since Cherry 0.1.0
  * @version 1.0.0
