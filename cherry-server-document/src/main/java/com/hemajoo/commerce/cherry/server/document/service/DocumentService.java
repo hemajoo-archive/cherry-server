@@ -15,8 +15,6 @@
 package com.hemajoo.commerce.cherry.server.document.service;
 
 import com.hemajoo.commerce.cherry.server.base.filter.IEntityFilter;
-import com.hemajoo.commerce.cherry.server.commons.entity.query.AbstractQueryStatus;
-import com.hemajoo.commerce.cherry.server.commons.entity.query.BaseQueryEntity;
 import com.hemajoo.commerce.cherry.server.commons.entity.query.GenericSpecification;
 import com.hemajoo.commerce.cherry.server.commons.entity.query.condition.QueryConditionException;
 import com.hemajoo.commerce.cherry.server.data.model.document.ServerDocument;
@@ -25,10 +23,13 @@ import com.hemajoo.commerce.cherry.server.document.filter.DocumentFilterMetadata
 import com.hemajoo.commerce.cherry.server.document.query.DocumentQuery;
 import com.hemajoo.commerce.cherry.server.document.repository.IDocumentRepository;
 import com.hemajoo.commerce.cherry.server.document.store.DocumentStore;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.IEntity;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.IStatusEntity;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.exception.EntityException;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.EntityStatusType;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.EntityType;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.ClientDocument;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.IDocument;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.exception.DocumentException;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.type.DocumentType;
 import lombok.Getter;
@@ -251,28 +252,28 @@ public class DocumentService implements IDocumentService
         {
             switch (change.getPropertyName())
             {
-                case DocumentQuery.DOCUMENT_TAGS ->
+                case IDocument.DOCUMENT_TAGS ->
                         documentServer.setTags((String) change.getRight());
 
-                case DocumentQuery.DOCUMENT_TYPE ->
+                case IDocument.DOCUMENT_TYPE ->
                         documentServer.setDocumentType((DocumentType) change.getRight());
 
-                case BaseQueryEntity.BASE_DESCRIPTION ->
+                case IDocument.BASE_DESCRIPTION ->
                         documentServer.setDescription((String) change.getRight());
 
-                case BaseQueryEntity.BASE_NAME ->
+                case IDocument.BASE_NAME ->
                         documentServer.setName((String) change.getRight());
 
-                case BaseQueryEntity.BASE_REFERENCE ->
+                case IDocument.BASE_REFERENCE ->
                         documentServer.setReference((String) change.getRight());
 
-                case AbstractQueryStatus.BASE_STATUS_TYPE ->
+                case IStatusEntity.BASE_STATUS_TYPE ->
                         documentServer.setStatusType((EntityStatusType) change.getRight());
 
-                case BaseQueryEntity.BASE_PARENT_TYPE ->
+                case IEntity.BASE_PARENT_TYPE ->
                         documentServer.setParentType((EntityType) change.getRight());
 
-                case BaseQueryEntity.BASE_PARENT_ID -> {
+                case IEntity.BASE_PARENT_ID -> {
                     //ServerEntity parent = (ServerEntity) factory.from(documentServer.getParentType(), UUID.fromString((String) change.getRight()));
                     //documentServer.setParent(parent);
                     // TODO Find another solution!

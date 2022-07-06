@@ -14,6 +14,7 @@
  */
 package com.hemajoo.commerce.cherry.server.shared.data.model.entity.base;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.EntityStatusType;
 
 import java.util.Date;
@@ -25,6 +26,18 @@ import java.util.Date;
  */
 public interface IStatusEntity extends IAuditEntity
 {
+    /**
+     * Field: <b>statusType</b> of an entity.
+     */
+    @JsonIgnore
+    public static final String BASE_STATUS_TYPE = "statusType";
+
+    /**
+     * Field: <b>since</b> (inactive date) of an entity.
+     */
+    @JsonIgnore
+    public static final String BASE_SINCE = "since";
+
     /**
      * Returns the status type.
      * @return Status type.

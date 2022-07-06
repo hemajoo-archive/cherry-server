@@ -59,6 +59,7 @@ public interface IServerEntity extends IEntity
     /**
      * Add a document to this entity.
      * @param document Document to add.
+     * @throws DocumentException Thrown to indicate an error when trying to add a document.
      */
     void addDocument(final @NonNull IServerDocument document) throws DocumentException;
 

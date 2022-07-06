@@ -23,6 +23,7 @@ import com.hemajoo.commerce.cherry.server.document.service.IDocumentService;
 import com.hemajoo.commerce.cherry.server.document.test.base.AbstractPostgresUnitTest;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.EntityStatusType;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.type.QueryOperatorType;
+import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.IDocument;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.exception.DocumentException;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.type.DocumentType;
 import lombok.extern.log4j.Log4j2;
@@ -203,7 +204,7 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
         {
             DocumentQuery.create()
                     .addCondition(QueryCondition.builder()
-                    .addField(DocumentQuery.DOCUMENT_CONTENT_PATH)
+                    .addField(IDocument.DOCUMENT_CONTENT_PATH)
                     .addValue("john.doe@gmail.com")
                     .addOperator(QueryOperatorType.EQUAL)
                     .build());
@@ -223,12 +224,12 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
 
         DocumentQuery query = DocumentQuery.create()
                 .addCondition(QueryCondition.builder()
-                        .addField(DocumentQuery.DOCUMENT_EXTENSION)
+                        .addField(IDocument.DOCUMENT_EXTENSION)
                         .addOperator(QueryOperatorType.EQUAL)
                         .addValue(DOCUMENT_EXTENSION)
                         .build())
                 .addCondition(QueryCondition.builder()
-                        .addField(DocumentQuery.DOCUMENT_CONTENT_LENGTH)
+                        .addField(IDocument.DOCUMENT_CONTENT_LENGTH)
                         .addOperator(QueryOperatorType.BETWEEN)
                         .addValue(0L)
                         .addValue(50000L)
@@ -262,12 +263,12 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
 
         DocumentQuery query = DocumentQuery.create()
                 .addCondition(QueryCondition.builder()
-                        .addField(DocumentQuery.DOCUMENT_MIMETYPE)
+                        .addField(IDocument.DOCUMENT_MIMETYPE)
                         .addOperator(QueryOperatorType.EQUAL)
                         .addValue(DOCUMENT_MIMETYPE)
                         .build())
                 .addCondition(QueryCondition.builder()
-                        .addField(DocumentQuery.DOCUMENT_TYPE)
+                        .addField(IDocument.DOCUMENT_TYPE)
                         .addOperator(QueryOperatorType.EQUAL)
                         .addValue(DOCUMENT_TYPE)
                         .build());
@@ -300,7 +301,7 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
 
         DocumentQuery query = DocumentQuery.create()
                 .addCondition(QueryCondition.builder()
-                        .addField(DocumentQuery.BASE_SINCE)
+                        .addField(IDocument.BASE_SINCE)
                         .addOperator(QueryOperatorType.BETWEEN)
                         .addValue(Date.from(DOCUMENT_DATE_LOW.toInstant()))
                         .addValue(Date.from(DOCUMENT_DATE_HIGH))
@@ -330,7 +331,7 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
 
         DocumentQuery query = DocumentQuery.create()
                 .addCondition(QueryCondition.builder()
-                        .addField(DocumentQuery.DOCUMENT_FILENAME)
+                        .addField(IDocument.DOCUMENT_FILENAME)
                         .addOperator(QueryOperatorType.CONTAINS)
                         .addValue(FILENAME_PATTERN)
                         .build());
@@ -357,7 +358,7 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
 
         DocumentQuery query = DocumentQuery.create()
                 .addCondition(QueryCondition.builder()
-                        .addField(DocumentQuery.DOCUMENT_CONTENT_LENGTH)
+                        .addField(IDocument.DOCUMENT_CONTENT_LENGTH)
                         .addOperator(QueryOperatorType.BETWEEN)
                         .addValue(CONTENT_LENGTH_LOW)
                         .addValue(CONTENT_LENGTH_HIGH)
@@ -384,7 +385,7 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
 
         DocumentQuery query = DocumentQuery.create()
                 .addCondition(QueryCondition.builder()
-                        .addField(DocumentQuery.DOCUMENT_CONTENT_LENGTH)
+                        .addField(IDocument.DOCUMENT_CONTENT_LENGTH)
                         .addOperator(QueryOperatorType.GREATER_THAN_EQUAL)
                         .addValue(CONTENT_LENGTH_LOW)
                         .build());
@@ -410,7 +411,7 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
 
         DocumentQuery query = DocumentQuery.create()
                 .addCondition(QueryCondition.builder()
-                        .addField(DocumentQuery.DOCUMENT_TYPE)
+                        .addField(IDocument.DOCUMENT_TYPE)
                         .addOperator(QueryOperatorType.EQUAL)
                         .addValue(DOCUMENT_TYPE)
                         .build());
@@ -436,7 +437,7 @@ class DocumentServiceUnitTest extends AbstractPostgresUnitTest
 
         DocumentQuery query = DocumentQuery.create()
                 .addCondition(QueryCondition.builder()
-                        .addField(DocumentQuery.BASE_STATUS_TYPE)
+                        .addField(IDocument.BASE_STATUS_TYPE)
                         .addOperator(QueryOperatorType.EQUAL)
                         .addValue(DOCUMENT_STATUS)
                         .build());

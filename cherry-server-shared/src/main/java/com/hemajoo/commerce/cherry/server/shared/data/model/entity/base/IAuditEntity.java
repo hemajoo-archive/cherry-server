@@ -14,6 +14,8 @@
  */
 package com.hemajoo.commerce.cherry.server.shared.data.model.entity.base;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -25,6 +27,30 @@ import java.util.Date;
  */
 public interface IAuditEntity extends Serializable
 {
+    /**
+     * Field: <b>createdDate</b> of an entity.
+     */
+    @JsonIgnore
+    public static final String BASE_CREATED_DATE = "createdDate";
+
+    /**
+     * Field: <b>modifiedDate</b> of an entity.
+     */
+    @JsonIgnore
+    public static final String BASE_MODIFIED_DATE = "modifiedDate";
+
+    /**
+     * Field: <b>createdBy</b> of an entity.
+     */
+    @JsonIgnore
+    public static final String BASE_CREATED_BY = "createdBy";
+
+    /**
+     * Field: <b>modifiedBy</b> of an entity.
+     */
+    @JsonIgnore
+    public static final String BASE_MODIFIED_BY = "modifiedBy";
+
     /**
      * Returns the creation date.
      * @return Date.

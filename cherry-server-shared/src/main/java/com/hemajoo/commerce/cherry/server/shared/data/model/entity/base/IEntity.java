@@ -14,6 +14,7 @@
  */
 package com.hemajoo.commerce.cherry.server.shared.data.model.entity.base;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.identity.Identity;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.base.identity.IdentityAware;
 import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.exception.DocumentException;
@@ -26,6 +27,60 @@ import com.hemajoo.commerce.cherry.server.shared.data.model.entity.document.exce
  */
 public interface IEntity extends IStatusEntity, Identity, IdentityAware
 {
+    /**
+     * Field: <b>id</b> of an entity.
+     */
+    @JsonIgnore
+    public static final String BASE_ENTITY_ID = "id";
+
+    /**
+     * Field: <b>entityType</b> of an entity.
+     */
+    @JsonIgnore
+    public static final String BASE_ENTITY_TYPE = "entityType";
+
+    /**
+     * Field: <b>name</b> of an entity.
+     */
+    @JsonIgnore
+    public static final String BASE_NAME = "name";
+
+    /**
+     * Field: <b>description</b> of an entity.
+     */
+    @JsonIgnore
+    public static final String BASE_DESCRIPTION = "description";
+
+    /**
+     * Field: <b>reference</b> of an entity.
+     */
+    @JsonIgnore
+    public static final String BASE_REFERENCE = "reference";
+
+    /**
+     * Field: <b>parentId</b> of an entity.
+     */
+    @JsonIgnore
+    public static final String BASE_PARENT_ID = "parentId";
+
+    /**
+     * Field: <b>parent</b> of an entity.
+     */
+    @JsonIgnore
+    public static final String BASE_PARENT = "parent";
+
+    /**
+     * Field: <b>parentType</b> of an entity.
+     */
+    @JsonIgnore
+    public static final String BASE_PARENT_TYPE = "parentType";
+
+    /**
+     * Field: <b>tags</b> of an entity.
+     */
+    @JsonIgnore
+    public static final String BASE_TAGS = "tags";
+
     /**
      * Returns the entity name.
      * @return Entity name.
